@@ -3,11 +3,13 @@ const router = express.Router();
 const service = require("./../models/admins");
 
 /* Read All Admins */
-const list = (req, res) => {
-  service
-    .list()
-    .then((result) => res.status(200).json(result))
-    .catch((err) => res.status(err).json({ err }));
+const list = async (req, res) => {
+  try {
+    const adminList = await service.list();
+    res.status(200).json(adminList);
+  } catch (error) {
+    res.status(404).json({ error });
+  }
 };
 
 router.get("/all", list);
