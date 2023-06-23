@@ -1,46 +1,14 @@
 const db = require("./../db");
+const usersService = require("./users");
+
 const T_USERS = "users";
 const T_ADMINS = "admins";
 
-const create = async (adminData) => {
-  try {
-    const { user_username, user_password, admin_displayname } = adminData;
-
-    //Check if the username exists
-    const existingUser = await db(T_USERS).where({ user_username }).first();
-    if (existingUser) {
-      throw new Error("Username already exists");
-    }
-
-    await db.transaction(async (trx) => {
-      /* Create User */
-      const [userId] = await trx(T_USERS).insert(
-        {
-          user_username,
-          user_password,
-          user_user_type_id: 1,
-        },
-        "user_id"
-      );
-
-      /* Create Admin */
-      const [adminId] = await trx(T_ADMINS).insert(
-        {
-          admin_displayname,
-          admin_user_id: userId,
-        },
-        "admin_id"
-      );
-
-      const admin = await trx(T_ADMINS).where("admin_id", adminId).first();
-      return admin;
-    });
-  } catch (err) {
-    throw err;
-  }
+const createAdmin = async (adminData) => {
+  return db(T_ADMINS).insert(adminData, "admin_id");
 };
 
-const read = (params = {}) => {
+const readAdmin = (params = {}) => {
   return db(T_ADMINS)
     .where(params)
     .select({
@@ -55,6 +23,38 @@ const read = (params = {}) => {
     .join(T_USERS, `${T_USERS}.user_id`, "=", `${T_ADMINS}.admin_user_id`);
 };
 
+const createUserAdmin = async (adminData) => {
+  const { user_username, user_password, admin_displayname } = adminData;
+
+  // check if the username aleady exists
+  const existingUser = await usersService.findByUsername(user_username);
+  if (existingUser) {
+    throw new Error("User already exists");
+  }
+
+  try {
+    await db.transaction(async (trx) => {
+      //Create user
+      const [userId] = await usersService.createUser({
+        user_username,
+        user_password,
+        user_user_type_id: 1,
+      });
+
+      //Create admin
+      const [adminId] = await createAdmin({
+        admin_displayname,
+        admin_user_id: userId,
+      });
+
+      const admin = await readAdmin({ admin_id: adminId });
+      return admin;
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
 const update = (adminId, adminData) => {
   return db(T_ADMINS).where({ admin_id: adminId }).update({ adminData });
 };
@@ -64,8 +64,8 @@ const remove = (adminId) => {
 };
 
 module.exports = {
-  create,
-  read,
+  createUserAdmin,
+  readAdmin,
   update,
   remove,
 };

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const service = require("./../models/admins");
+const adminsService = require("./../models/admins");
 
 const { generateAccessToken, authenticateToken } = require("./../utils/jwt");
 const { isValidString } = require("./../utils/isValidValue");
@@ -21,7 +21,7 @@ router.get("/token/:role", (req, res) => {
 /* Read All Admins */
 const list = async (req, res) => {
   try {
-    const adminList = await service.read();
+    const adminList = await adminsService.readAdmin();
     return res.status(200).json(adminList);
   } catch (error) {
     return res.status(400).json({ error });
@@ -44,7 +44,7 @@ const create = async (req, res) => {
       });
     }
 
-    const admin = await service.create({
+    const admin = await adminsService.createUserAdmin({
       admin_displayname,
       user_username,
       user_password,
