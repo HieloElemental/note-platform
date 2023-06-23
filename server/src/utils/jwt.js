@@ -18,19 +18,19 @@ const authenticateToken = (requiredRoles) => {
     if (token == null)
       return res.status(401).send({ error: "no token provided" });
 
-    try{
+    try {
       jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {
         if (err) return res.status(403);
-        console.log(requiredRoles, decodedToken.role.toString())
+        console.log(requiredRoles, decodedToken.role.toString());
         if (!requiredRoles.includes(decodedToken.role))
-        return res.status(401).send({ error: "token role not allowed" });
-        
+          return res.status(401).send({ error: "token role not allowed" });
+
         req.id = decodedToken.id;
         req.role = decodedToken.role;
-        
+
         next();
       });
-    }catch (err){
+    } catch (err) {
       return res.status(400).send({ err });
     }
   };
