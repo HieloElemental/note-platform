@@ -175,7 +175,7 @@ CREATE TABLE notes (
 INSERT INTO
     user_types (user_type_name) 
 VALUES 
-    ('administrator'), 
+    ('admin'), 
     ('teacher'), 
     ('student');
 

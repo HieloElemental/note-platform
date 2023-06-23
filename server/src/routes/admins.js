@@ -39,12 +39,16 @@ const create = async (req, res) => {
     const isValidFields = fieldsToValidate.every(isValidString);
 
     if (!isValidFields) {
-      return res
-        .status(400)
-        .json({ error: "Invalid Characters In Input Fields" });
+      return res.status(400).json({
+        error: "Ommited Fields Or Invalid Characters In Input Fields",
+      });
     }
 
-    const admin = await service.create(req.body);
+    const admin = await service.create({
+      admin_displayname,
+      user_username,
+      user_password,
+    });
     return res.status(201).json(admin);
   } catch (error) {
     return res.status(400).json({ error });

@@ -2,14 +2,16 @@ const db = require("./../db");
 const T_USERS = "users";
 const T_ADMINS = "admins";
 
-const cereate = async (adminData) => {
+const create = async (adminData) => {
   try {
+    const { user_username, user_password, admin_displayname } = adminData;
     await db.transaction(async (trx) => {
       /* Create User */
       const [userId] = await trx(T_USERS).insert(
         {
           user_username,
           user_password,
+          user_user_type_id: 1,
         },
         "user_id"
       );
@@ -48,7 +50,7 @@ const remove = (adminId) => {
 };
 
 module.exports = {
-  cereate,
+  create,
   read,
   update,
   remove,
