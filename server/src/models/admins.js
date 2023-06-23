@@ -5,6 +5,13 @@ const T_ADMINS = "admins";
 const create = async (adminData) => {
   try {
     const { user_username, user_password, admin_displayname } = adminData;
+
+    //Check if the username exists
+    const existingUser = await db(T_USERS).where({ user_username }).first();
+    if (existingUser) {
+      throw new Error("Username already exists");
+    }
+
     await db.transaction(async (trx) => {
       /* Create User */
       const [userId] = await trx(T_USERS).insert(
@@ -34,11 +41,18 @@ const create = async (adminData) => {
 };
 
 const read = (params = {}) => {
-  return db(T_ADMINS).where(params).select({
-    adminId: "admin_id",
-    adminDisplayname: "admin_displayname",
-    adminUserId: "admin_user_id",
-  });
+  return db(T_ADMINS)
+    .where(params)
+    .select({
+      adminId: "admin_id",
+      adminDisplayname: "admin_displayname",
+      adminUserId: "admin_user_id",
+      userId: "user_id",
+      userUsername: "user_username",
+      userPassword: "user_password",
+      userUserType: "user_user_type_id",
+    })
+    .join(T_USERS, `${T_USERS}.user_id`, "=", `${T_ADMINS}.admin_user_id`);
 };
 
 const update = (adminId, adminData) => {

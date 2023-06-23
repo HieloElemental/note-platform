@@ -51,7 +51,7 @@ const create = async (req, res) => {
     });
     return res.status(201).json(admin);
   } catch (error) {
-    return res.status(400).json({ error });
+    return res.status(400).json({ error: error.message });
   }
 };
 
