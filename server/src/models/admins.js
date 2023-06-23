@@ -1,8 +1,34 @@
 const db = require("./../db");
+const T_USERS = "users";
 const T_ADMINS = "admins";
 
-const cereate = (adminData) => {
-  return db(T_ADMINS).insert(adminData);
+const cereate = async (adminData) => {
+  try {
+    await db.transaction(async (trx) => {
+      /* Create User */
+      const [userId] = await trx(T_USERS).insert(
+        {
+          user_username,
+          user_password,
+        },
+        "user_id"
+      );
+
+      /* Create Admin */
+      const [adminId] = await trx(T_ADMINS).insert(
+        {
+          admin_displayname,
+          admin_user_id: userId,
+        },
+        "admin_id"
+      );
+
+      const admin = await trx(T_ADMINS).where("admin_id", adminId).first();
+      return admin;
+    });
+  } catch (err) {
+    throw err;
+  }
 };
 
 const read = (params = {}) => {
