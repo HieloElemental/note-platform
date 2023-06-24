@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const adminsService = require("./../models/admins");
+const adminUsersService = require("./../models/adminUsers");
 
 const { generateAccessToken, authenticateToken } = require("./../utils/jwt");
 const { isValidString } = require("./../utils/isValidValue");
@@ -44,7 +45,7 @@ const create = async (req, res) => {
       });
     }
 
-    const admin = await adminsService.createUserAdmin({
+    const admin = await adminUsersService.createUserAdmin({
       admin_displayname,
       user_username,
       user_password,
