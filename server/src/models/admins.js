@@ -1,5 +1,4 @@
 const db = require("./../db");
-const usersService = require("./users");
 
 const T_USERS = "users";
 const T_ADMINS = "admins";
