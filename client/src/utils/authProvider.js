@@ -13,7 +13,7 @@ const signIn = async ({ userUsername, userPassword }) => {
     const newUser = response.data.user;
 
     localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(newUser));
+    localStorage.setItem("userData", JSON.stringify(newUser));
     return { token, newUser };
   } catch (err) {
     throw new Error("Login failed: " + err.message);

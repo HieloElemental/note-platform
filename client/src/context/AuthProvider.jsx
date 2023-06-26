@@ -7,7 +7,9 @@ const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const storedUserData = localStorage.getItem("userData");
-    return storedUserData ? JSON.parse(storedUserData) : null;
+    return storedUserData
+      ? { ...JSON.parse(storedUserData), token: localStorage.getItem("token") }
+      : null;
   });
 
   const signIn = async (userData) => {
