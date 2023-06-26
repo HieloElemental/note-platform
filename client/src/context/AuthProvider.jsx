@@ -5,7 +5,10 @@ import authProvider from "../utils/authProvider";
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUserData = localStorage.getItem("userData");
+    return storedUserData ? JSON.parse(storedUserData) : null;
+  });
 
   const signIn = async (userData) => {
     const { token, newUser } = await authProvider.signIn(userData);

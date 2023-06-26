@@ -21,7 +21,7 @@ const authenticateToken = (requiredRoles) => {
     try {
       jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {
         if (err) return res.status(403);
-        if (!requiredRoles.includes(decodedToken.role))
+        if (requiredRoles && !requiredRoles.includes(decodedToken.role))
           return res.status(401).send({ error: "token role not allowed" });
 
         req.id = decodedToken.id;
