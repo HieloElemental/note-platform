@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import useAuth from "../hooks/useAuth";
 
-const RequireAuth = ({ children }) => {
+const RequireAuth = ({ children, allowedRoles }) => {
   const auth = useAuth();
   const location = useLocation();
 
@@ -11,10 +11,15 @@ const RequireAuth = ({ children }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
+  if (allowedRoles && !allowedRoles.includes(auth.user.role)) {
+    return <Navigate to="/unauthorised" replace />;
+  }
+
   return children;
 };
 RequireAuth.propTypes = {
   children: PropTypes.node.isRequired,
+  allowedRoles: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default RequireAuth;

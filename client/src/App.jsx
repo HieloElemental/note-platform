@@ -12,7 +12,7 @@ const App = () => {
         <Route
           path="/protected"
           element={
-            <RequireAuth>
+            <RequireAuth allowedRoles={["teacher", "admin"]}>
               <h1>This Page is protected</h1>
             </RequireAuth>
           }

@@ -20,6 +20,14 @@
   border-radius: 10px;
 }
 
+.login-box form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .login-box h2 {
   margin: 0 0 30px;
   padding: 0;
@@ -29,6 +37,7 @@
 
 .login-box .user-box {
   position: relative;
+  width: 100%;
 }
 
 .login-box .user-box input {

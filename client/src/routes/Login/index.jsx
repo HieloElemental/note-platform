@@ -15,6 +15,8 @@ const Login = () => {
     const username = formData.get("username");
     const password = formData.get("password");
 
+    console.log(username, password);
+
     await auth.signIn({ username, password });
     navigate(location.state?.from || "/");
   };
@@ -32,7 +34,7 @@ const Login = () => {
             <input type="password" name="password" required />
             <label>Contraseña</label>
           </div>
-          <input className="login-btn" type="submit" value="Ingresar" />
+          <button className="login-btn">Ingresar</button>
         </form>
       </div>
     </div>
