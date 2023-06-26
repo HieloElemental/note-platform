@@ -1,20 +1,24 @@
 import { Routes, Route } from "react-router-dom";
-import Auth from "./Auth";
+import { AuthProvider } from "./context/AuthProvider";
+import RequireAuth from "./auth/RequireAuth";
+import Login from "./routes/Login";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<h1>HomePage</h1>} />
-      <Route path="/login" element={<h1>LoginPage</h1>} />
-      <Route
-        path="/auth"
-        element={
-          <Auth>
-            <h1>SignupPage</h1>
-          </Auth>
-        }
-      />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<h1>HomePage</h1>} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/protected"
+          element={
+            <RequireAuth>
+              <h1>This Page is protected</h1>
+            </RequireAuth>
+          }
+        />
+      </Routes>
+    </AuthProvider>
   );
 };
 
