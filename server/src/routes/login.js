@@ -28,7 +28,7 @@ const login = async (req, res) => {
     console.log(user.userId, user.userTypeName);
     const token = generateAccessToken(user.userId, user.userTypeName);
 
-    return res.status(200).json({ token });
+    return res.status(200).json({ token, user });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }

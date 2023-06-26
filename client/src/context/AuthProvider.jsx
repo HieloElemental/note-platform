@@ -8,8 +8,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const signIn = async (userData) => {
-    const newUser = await authProvider.signIn(userData);
-    setUser({ ...newUser });
+    const { token, newUser } = await authProvider.signIn(userData);
+    setUser({ ...newUser, token });
   };
 
   const signOut = async () => {

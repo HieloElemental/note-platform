@@ -12,12 +12,10 @@ const Login = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const username = formData.get("username");
-    const password = formData.get("password");
+    const userUsername = formData.get("username");
+    const userPassword = formData.get("password");
 
-    console.log(username, password);
-
-    await auth.signIn({ username, password });
+    await auth.signIn({ userUsername, userPassword });
     navigate(location.state?.from || "/");
   };
 

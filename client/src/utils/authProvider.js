@@ -2,17 +2,18 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3000";
 
-const signIn = async (username, password) => {
+const signIn = async ({ userUsername, userPassword }) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/login`, {
-      username,
-      password,
+      userUsername,
+      userPassword,
     });
 
     const token = response.data.token;
+    const newUser = response.data.user;
 
     localStorage.setItem("token", token);
-    return token;
+    return { token, newUser };
   } catch (err) {
     throw new Error("Login failed: " + err.message);
   }

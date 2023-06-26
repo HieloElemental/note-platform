@@ -17,7 +17,6 @@ const readAdmin = (params = {}) => {
       adminUserId: "admin_user_id",
       userId: "user_id",
       userUsername: "user_username",
-      userPassword: "user_password",
       userUserTypeId: "user_user_type_id",
       userTypeId: "user_type_id",
       userTypeName: "user_type_name",
