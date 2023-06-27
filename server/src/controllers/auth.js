@@ -3,8 +3,9 @@ const usersService = require("../models/users");
 const { httpError } = require("../helpers/handleError");
 const { isValidString } = require("../utils/isValidValue");
 const { generateAccessToken } = require("../utils/jwt");
+const { compare } = require("bcryptjs");
 
-const login = async (req, res) => {
+const loginCtrl = async (req, res) => {
   try {
     const { userUsername: user_username, userPassword: user_password } =
       req.body;
@@ -16,7 +17,8 @@ const login = async (req, res) => {
         error: "Ommited Fields Or Invalid Characters In Input Fields",
       });
     }
-    const user = await usersService.login({ user_username, user_password });
+
+    const user = await usersService.login({ user_username });
 
     if (!user) {
       return res
@@ -24,7 +26,13 @@ const login = async (req, res) => {
         .json({ error: "Invalid Credentials, user not found" });
     }
 
-    console.log(user.userId, user.userTypeName);
+    const checkPassword = await compare(user_password, user.userPassword);
+    if (!checkPassword) {
+      return res
+        .status(401)
+        .json({ error: "Invalid Credentials, wrong password" });
+    }
+
     const token = generateAccessToken(user.userId, user.userTypeName);
 
     return res.status(200).json({ token, user });
@@ -33,4 +41,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+module.exports = { loginCtrl };

@@ -182,7 +182,7 @@ VALUES
 INSERT INTO 
     users (user_username, user_password, user_user_type_id) 
 VALUES 
-    ('123456789', '123456789', 1);
+    ('123456789', '$2a$10$z7gkZVODMy9dk28RwM0mBOPqXC.KcK6OB6xfk8gZyRyOGevi9yfaK', 1);
 
 INSERT INTO 
     admins (admin_displayname, admin_user_id) 

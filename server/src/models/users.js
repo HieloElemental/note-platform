@@ -21,7 +21,7 @@ const findByUsername = async (user_username) => {
     .first();
 };
 
-const login = async ({ user_username, user_password }) => {
+const login = async ({ user_username }) => {
   return db(T_USERS)
     .select({
       userId: "user_id",
@@ -29,8 +29,9 @@ const login = async ({ user_username, user_password }) => {
       userUserTypeId: "user_user_type_id",
       userTypeId: "user_type_id",
       userTypeName: "user_type_name",
+      userPassword: "user_password",
     })
-    .where({ user_username, user_password })
+    .where({ user_username })
     .join(
       T_USER_TYPES,
       `${T_USER_TYPES}.user_type_id`,
