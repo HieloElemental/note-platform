@@ -3,7 +3,7 @@ const router = express.Router();
 const authenticateToken = require("../middleware/authenticateToken");
 const { list, create } = require("../controllers/admins");
 
-const { generateAccessToken } = require("./../utils/jwt");
+const generateAccessToken = require("../helpers/generateAccessToken");
 
 // TEMP: Start
 /* Generate Token */

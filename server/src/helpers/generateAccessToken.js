@@ -10,6 +10,4 @@ const generateAccessToken = (id, role) => {
   }
 };
 
-module.exports = {
-  generateAccessToken,
-};
+module.exports = generateAccessToken;

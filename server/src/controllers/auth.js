@@ -2,7 +2,7 @@ const usersService = require("../models/users");
 
 const { httpError } = require("../helpers/handleError");
 const { isValidString } = require("../utils/isValidValue");
-const { generateAccessToken } = require("../utils/jwt");
+const generateAccessToken = require("../helpers/generateAccessToken");
 const { compare } = require("bcryptjs");
 
 const loginCtrl = async (req, res) => {
