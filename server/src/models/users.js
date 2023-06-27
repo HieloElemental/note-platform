@@ -1,4 +1,4 @@
-const db = require("./../db");
+const db = require("../config/db");
 const T_USERS = "users";
 const T_USER_TYPES = "user_types";
 

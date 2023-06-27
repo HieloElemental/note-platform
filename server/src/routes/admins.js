@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const adminsService = require("./../models/admins");
-const adminUsersService = require("./../models/adminUsers");
+const authenticateToken = require("../middleware/authenticateToken");
+const { list, create } = require("../controllers/admins");
 
-const { generateAccessToken, authenticateToken } = require("./../utils/jwt");
-const { isValidString } = require("./../utils/isValidValue");
+const { generateAccessToken } = require("./../utils/jwt");
 
 // TEMP: Start
 /* Generate Token */
@@ -18,43 +17,6 @@ router.get("/token/:role", (req, res) => {
   }
 });
 // TEMP: End
-
-/* Read All Admins */
-const list = async (req, res) => {
-  try {
-    const adminList = await adminsService.readAdmin();
-    return res.status(200).json(adminList);
-  } catch (error) {
-    return res.status(400).json({ error });
-  }
-};
-
-const create = async (req, res) => {
-  try {
-    const {
-      adminDisplayname: admin_displayname,
-      userUsername: user_username,
-      userPassword: user_password,
-    } = req.body;
-    const fieldsToValidate = [admin_displayname, user_username, user_password];
-    const isValidFields = fieldsToValidate.every(isValidString);
-
-    if (!isValidFields) {
-      return res.status(400).json({
-        error: "Ommited Fields Or Invalid Characters In Input Fields",
-      });
-    }
-
-    const admin = await adminUsersService.createUserAdmin({
-      admin_displayname,
-      user_username,
-      user_password,
-    });
-    return res.status(201).json(admin);
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
-};
 
 router.get("/all", authenticateToken(["admin"]), list);
 router.get("/create", authenticateToken(["admin"]), create);
