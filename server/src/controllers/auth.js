@@ -18,22 +18,25 @@ const loginCtrl = async (req, res) => {
       });
     }
 
-    const user = await usersService.login({ user_username });
+    const logedUser = await usersService.login({ user_username });
 
-    if (!user) {
+    if (!logedUser) {
       return res
         .status(401)
         .json({ error: "Invalid Credentials, user not found" });
     }
 
-    const checkPassword = await compare(user_password, user.userPassword);
+    const { userPassword, userId, userTypeName, userUsername } = logedUser;
+
+    const checkPassword = await compare(user_password, userPassword);
     if (!checkPassword) {
       return res
         .status(401)
         .json({ error: "Invalid Credentials, wrong password" });
     }
 
-    const token = generateAccessToken(user.userId, user.userTypeName);
+    const token = generateAccessToken(userId, userTypeName);
+    const user = { userId, userTypeName, userUsername };
 
     return res.status(200).json({ token, user });
   } catch (e) {
