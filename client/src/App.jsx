@@ -7,12 +7,22 @@ const App = () => {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<h1>HomePage</h1>} />
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <h1>HomePage</h1>
+              <RequireAuth allowedRoles={["teacher"]}>
+                <h1>You're a teacher</h1>
+              </RequireAuth>
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route
           path="/protected"
           element={
-            <RequireAuth allowedRoles={["teacher", "admin"]}>
+            <RequireAuth allowedRoles={["teacher", "admin"]} unauth>
               <h1>This Page is protected</h1>
             </RequireAuth>
           }
