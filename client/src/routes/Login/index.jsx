@@ -22,7 +22,6 @@ const Login = () => {
       await auth.signIn({ userUsername, userPassword });
       navigate(location.state?.from || "/");
     } catch (error) {
-      console.log(error);
       showError(error);
     }
   };
@@ -37,7 +36,7 @@ const Login = () => {
             onClose={clearError}
           />
         )}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <h2>Ingresar a sigma</h2>
           <div className="user-box">
             <input type="text" name="username" required />

@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
+import "./index.css";
 
 const ErrorAlert = ({ error, errTitle, onClose }) => {
   return (
     <div className="ErrorBox">
-      <h1>{errTitle}</h1>
-      <p>{error}</p>
-      <button onClick={onClose}>x</button>
+      <button onClick={onClose}>&times;</button>
+      <strong>Ops!</strong>
+      <br />
+      {error}
     </div>
   );
 };
