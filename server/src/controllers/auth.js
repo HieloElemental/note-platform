@@ -14,7 +14,7 @@ const loginCtrl = async (req, res) => {
 
     if (!isValidFields) {
       return res.status(400).json({
-        error: "Ommited Fields Or Invalid Characters In Input Fields",
+        error: "Campos Vacíos O Carácteres Inválidos En Algún Campo",
       });
     }
 
@@ -23,7 +23,7 @@ const loginCtrl = async (req, res) => {
     if (!logedUser) {
       return res
         .status(401)
-        .json({ error: "Invalid Credentials, user not found" });
+        .json({ error: "Credenciales Inválidas, Usuario No Encontrado" });
     }
 
     const { userPassword, userId, userTypeName, userUsername } = logedUser;
@@ -32,7 +32,7 @@ const loginCtrl = async (req, res) => {
     if (!checkPassword) {
       return res
         .status(401)
-        .json({ error: "Invalid Credentials, wrong password" });
+        .json({ error: "Credenciales Invalidas! Contraseña Incorrecta" });
     }
 
     const token = generateAccessToken(userId, userTypeName);

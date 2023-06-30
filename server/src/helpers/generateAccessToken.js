@@ -6,7 +6,7 @@ const generateAccessToken = (id, role) => {
       expiresIn: "4h",
     });
   } catch (err) {
-    return new Error(`Error! Something went wrong. message: ${err.message}`);
+    return new Error(err.message);
   }
 };
 

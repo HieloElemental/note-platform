@@ -25,7 +25,7 @@ const create = async (req, res) => {
 
     if (!isValidFields) {
       return res.status(400).json({
-        error: "Ommited Fields Or Invalid Characters In Input Fields",
+        error: "Campos Vacíos O Carácteres Inválidos En Algún Campo",
       });
     }
 
