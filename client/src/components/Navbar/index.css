@@ -103,6 +103,10 @@
   font-weight: 500;
 }
 
+li.Navbar-open {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .Navbar-navbar {
     max-width: 100%;
@@ -169,5 +173,9 @@
 
   .Navbar-links.show {
     left: 0;
+  }
+
+  li.Navbar-open {
+    display: block;
   }
 }
