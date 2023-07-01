@@ -20,8 +20,8 @@ const RequireAuth = ({ children, allowedRoles, unauth }) => {
 };
 RequireAuth.propTypes = {
   children: PropTypes.node.isRequired,
-  allowedRoles: PropTypes.arrayOf(PropTypes.string).isRequired,
-  unauth: PropTypes.bool.isRequired,
+  allowedRoles: PropTypes.arrayOf(PropTypes.string),
+  unauth: PropTypes.bool,
 };
 
 export default RequireAuth;

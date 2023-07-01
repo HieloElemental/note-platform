@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider";
 import RequireAuth from "./auth/RequireAuth";
+import Home from "./routes/Home";
 import Login from "./routes/Login";
 
 const App = () => {
@@ -11,10 +12,7 @@ const App = () => {
           path="/"
           element={
             <RequireAuth>
-              <h1>HomePage</h1>
-              <RequireAuth allowedRoles={["teacher"]}>
-                <h1>You're a teacher</h1>
-              </RequireAuth>
+              <Home />
             </RequireAuth>
           }
         />
