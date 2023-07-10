@@ -26,12 +26,15 @@ const navbarLinks = {
 };
 
 const Navbar = () => {
-  const [showSublinks, setShowSublinks] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showSublinks, setShowSublinks] = useState({});
 
   const renderNavbarLinks = (links) => {
-    const showSubLinkHandler = () => {
-      setShowSublinks((prevState) => !prevState);
+    const showSubLinkHandler = (displayName) => {
+      setShowSublinks((prevState) => ({
+        ...prevState,
+        [displayName]: !prevState[displayName],
+      }));
     };
 
     return (
@@ -41,16 +44,16 @@ const Navbar = () => {
             <div className=".Navbar-fake-a">
               <Link to={link.href}>{link.displayName}</Link>
               {link.sublinks && (
-                <i onClick={showSubLinkHandler}>
+                <i onClick={() => showSubLinkHandler(link.displayName)}>
                   <img
-                    className={showSublinks ? "rotate" : ""}
+                    className={showSublinks[link.displayName] ? "rotate" : ""}
                     src={arrow}
                     alt="Arrow"
                   />
                 </i>
               )}
             </div>
-            {link.sublinks && showSublinks && (
+            {link.sublinks && showSublinks[link.displayName] && (
               <ul className="Navbar-links">
                 {renderNavbarLinks(link.sublinks)}
               </ul>
