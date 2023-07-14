@@ -2,6 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
   width: 100%;
   height: 70px;
   background: #2f2f2f;
@@ -58,9 +59,8 @@
 }
 
 .Navbar-navbar i img {
-  height: 1.2em;
-  width: 1.2em;
-  padding: 10px;
+  z-index: 11;
+  height: 50%;
   filter: invert();
   transition: all 0.3s ease;
 }
@@ -105,6 +105,7 @@
 
 li.Navbar-open {
   display: none;
+  height: 100%;
 }
 
 @media (max-width: 1000px) {
@@ -116,7 +117,7 @@ li.Navbar-open {
   }
 
   .Navbar-navbar .Navbar-links {
-    max-width: 300px;
+    max-width: 400px;
     width: 100%;
     padding: 0 25px;
     margin-top: 0;
@@ -131,15 +132,19 @@ li.Navbar-open {
     transition: 1s ease-in-out;
   }
 
+  .Navbar-navbar .Navbar-links .Navbar-links {
+    padding: 0;
+  }
+
   .Navbar-navbar ul li {
     display: block;
     margin-top: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    width: 90%;
   }
 
   .Navbar-links li {
     padding: 0 10px;
+    width: 100%;
   }
 
   .Navbar-navbar li div {
@@ -164,7 +169,6 @@ li.Navbar-open {
     top: 0;
     left: 0;
     box-shadow: none;
-    width: 80%;
   }
 
   .Navbar ul ul li {

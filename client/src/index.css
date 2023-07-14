@@ -6,3 +6,7 @@
   box-sizing: border-box;
   font-family: "Comic Neue", cursive;
 }
+
+body {
+  background: #222;
+}
