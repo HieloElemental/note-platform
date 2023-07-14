@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -117,9 +117,10 @@ li.Navbar-open {
 }
 
 main {
+  display: flex;
+  flex-wrap: wrap;
   min-height: 100vh;
-  margin-top: 70px;
-  padding: 20px;
+  padding: 80px 20px 20px 20px;
   background: linear-gradient(
       to bottom,
       rgba(0, 255, 255, 0),
@@ -128,17 +129,38 @@ main {
     url("img/thumbnail.jpeg") fixed center center/cover;
 }
 
-.Sidebar {
-  max-width: 250px;
+main table {
+  border-collapse: collapse;
+}
+
+main table tr td {
+  margin: 0;
+  padding: 5px;
+  border: 1px solid #fff;
+}
+
+main table thead {
+  font-weight: 800;
+}
+
+.Card {
+  height: min-content;
   margin: 30px 5%;
-  padding: 20px;
+  padding: 40px;
   background: rgba(100, 100, 100, 0.8);
   border-radius: 20px;
+  color: #fff;
+}
+
+.Sidebar {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Sidebar img {
-  width: 100%;
-  height: 250px;
+  width: calc(100% - 30px);
   border-radius: 50%;
   object-fit: cover;
 }

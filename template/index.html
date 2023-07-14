@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,46 +7,93 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root">
-      <div>
-        <nav class="Navbar">
-          <div class="Navbar-navbar">
-            <li class="Navbar-logo"><a href="/">Colegio Empresarial</a></li>
-            <ul class="Navbar-links">
-              <li>
-                <div class=".Navbar-fake-a"><a href="/">Inicio</a></div>
-              </li>
-              <li>
-                <div class=".Navbar-fake-a">
-                  <a href="/manage">Manejar</a>
-                  <i>
-                    <img src="img/arrow.svg" alt="Arrow" />
-                  </i>
-                </div>
-              </li>
-              <li>
-                <div class=".Navbar-fake-a">
-                  <a href="/stats">Estadisticas</a>
-                </div>
-              </li>
-              <li>
-                <div class=".Navbar-fake-a"><a href="/logout">Salir</a></div>
-              </li>
-            </ul>
-            <li class="Navbar-open">
+    <nav class="Navbar">
+      <div class="Navbar-navbar">
+        <li class="Navbar-logo"><a href="/">Colegio Empresarial</a></li>
+        <ul class="Navbar-links">
+          <li>
+            <div class="Navbar-fake-a"><a href="/">Inicio</a></div>
+          </li>
+          <li>
+            <div class="Navbar-fake-a">
+              <a href="/manage">Manejar</a>
               <i>
-                <img src="img/menu.svg" alt="Menu" />
+                <img src="img/arrow.svg" alt="Arrow" />
               </i>
-            </li>
-          </div>
-        </nav>
-        <main>
-          <div class="Sidebar">
-            <img src="img/man.jpg" alt="Pfp" />
-          </div>
-          <p>This is the home page admin user</p>
-        </main>
+            </div>
+          </li>
+          <li>
+            <div class="Navbar-fake-a">
+              <a href="/stats">Estadisticas</a>
+            </div>
+          </li>
+          <li>
+            <div class="Navbar-fake-a"><a href="/logout">Salir</a></div>
+          </li>
+        </ul>
+        <li class="Navbar-open">
+          <i>
+            <img src="img/menu.svg" alt="Menu" />
+          </i>
+        </li>
       </div>
-    </div>
+    </nav>
+
+    <main>
+      <div class="Card Sidebar">
+        <img src="img/man.jpg" alt="Pfp" />
+        <div class="Siedebar-element">
+          <p>
+            <strong>Nombre: </strong>
+            Nombre del estudiante
+          </p>
+        </div>
+        <div class="Siedebar-element">
+          <p>
+            <strong>Apellidos: </strong>
+            Apellidos del estudiante
+          </p>
+        </div>
+        <div class="Siedebar-element">
+          <p>
+            <strong>Edad: </strong>
+            Edad del estudiante
+          </p>
+        </div>
+        <div class="Siedebar-element">
+          <p>
+            <strong>Grupo: </strong>
+            Grado del estudiante-Grupo del estudiante
+          </p>
+        </div>
+      </div>
+      <div class="Card">
+        <h1>HomePage</h1>
+        <p>This is the home page admin user</p>
+
+        <h2>here's a table</h2>
+        <table>
+          <thead>
+            <tr>
+              <td>Element</td>
+              <td>Data</td>
+              <td>Date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Element 1</td>
+              <td>This is the element 1 data</td>
+              <td>Made on 09/11/2022</td>
+            </tr>
+            <tr>
+              <td>Element 2</td>
+              <td>This period ends on December 1st</td>
+              <td>Made on 05/06/2023</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
   </body>
 </html>
