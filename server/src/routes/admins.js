@@ -18,7 +18,8 @@ router.get("/token/:role", (req, res) => {
 });
 // TEMP: End
 
-router.get("/all", authenticateToken(["admin"]), list);
-router.get("/create", authenticateToken(["admin"]), create);
+// manage routes
+router.get("/manage/all", authenticateToken(["admin"]), list);
+router.get("/manage/create", authenticateToken(["admin"]), create);
 
 module.exports = router;
