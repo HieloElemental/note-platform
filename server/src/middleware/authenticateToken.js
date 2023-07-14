@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 const authenticateToken = (requiredRoles) => {
   return (req, res, next) => {
     const authHeader = req.headers["authorization"];
