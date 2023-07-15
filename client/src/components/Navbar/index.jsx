@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import RequireAuth from "../../auth/RequireAuth";
-import arrow from "./assets/arrow.svg";
-import menu from "./assets/menu.svg";
+import Arrow from "./assets/Arrow";
+import MenuIcon from "./assets/MenuIcon";
 import "./index.css";
 
 const navbarLinks = {
@@ -45,10 +45,8 @@ const Navbar = () => {
               <Link to={link.href}>{link.displayName}</Link>
               {link.sublinks && (
                 <i onClick={() => showSubLinkHandler(link.displayName)}>
-                  <img
+                  <Arrow
                     className={showSublinks[link.displayName] ? "rotate" : ""}
-                    src={arrow}
-                    alt="Arrow"
                   />
                 </i>
               )}
@@ -88,7 +86,7 @@ const Navbar = () => {
         </ul>
         <li className="Navbar-open" onClick={toggleMobileMenu}>
           <i>
-            <img src={menu} alt="Menu" />
+            <MenuIcon className={showMobileMenu ? "open" : ""} />
           </i>
         </li>
       </div>
