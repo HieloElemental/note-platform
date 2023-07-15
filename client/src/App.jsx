@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import RequireAuth from "./auth/RequireAuth";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
+import Logout from "./components/Logout";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route
           path="/protected"
           element={

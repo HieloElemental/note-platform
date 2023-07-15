@@ -22,6 +22,7 @@ const signIn = async ({ userUsername, userPassword }) => {
 
 const signOut = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("userData");
 };
 
 const isAuthenticated = () => {
