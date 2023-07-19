@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import useAuth from "../hooks/useAuth";
 
-const RequireAuth = ({ children, allowedRoles, unauth }) => {
+const RequireAuth = ({ children, allowedRoles, redirect }) => {
   const auth = useAuth();
   const location = useLocation();
 
@@ -12,7 +12,7 @@ const RequireAuth = ({ children, allowedRoles, unauth }) => {
   }
 
   if (allowedRoles && !allowedRoles.includes(auth.user.userTypeName)) {
-    if (unauth) return <Navigate to="/unauthorised" replace />;
+    if (redirect) return <Navigate to="/unauthorised" replace />;
     return <></>;
   }
 
@@ -21,7 +21,7 @@ const RequireAuth = ({ children, allowedRoles, unauth }) => {
 RequireAuth.propTypes = {
   children: PropTypes.node.isRequired,
   allowedRoles: PropTypes.arrayOf(PropTypes.string),
-  unauth: PropTypes.bool,
+  redirect: PropTypes.bool,
 };
 
 export default RequireAuth;
