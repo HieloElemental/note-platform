@@ -8,6 +8,29 @@ const createAdmin = async (adminData) => {
   return db(T_ADMINS).insert(adminData, "admin_id");
 };
 
+findAdminByUserId = (userId) => {
+  return db(T_ADMINS)
+    .where({ admin_user_id: userId })
+    .select({
+      roleId: "admin_id",
+      roleDisplayname: "admin_displayname",
+      roleUserId: "admin_user_id",
+      userId: "user_id",
+      userUsername: "user_username",
+      userUserTypeId: "user_user_type_id",
+      userTypeId: "user_type_id",
+      userTypeName: "user_type_name",
+    })
+    .join(T_USERS, `${T_USERS}.user_id`, "=", `${T_ADMINS}.admin_user_id`)
+    .join(
+      T_USER_TYPES,
+      `${T_USER_TYPES}.user_type_id`,
+      "=",
+      `${T_USERS}.user_user_type_id`
+    )
+    .first();
+};
+
 const readAdmin = (params = {}) => {
   return db(T_ADMINS)
     .where(params)
@@ -41,6 +64,7 @@ const remove = (adminId) => {
 module.exports = {
   createAdmin,
   readAdmin,
+  findAdminByUserId,
   update,
   remove,
 };
