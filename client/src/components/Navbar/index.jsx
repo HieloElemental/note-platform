@@ -10,12 +10,23 @@ const navbarLinks = {
   admin: [
     { displayName: "Inicio", href: "/" },
     {
-      displayName: "Manejar",
+      displayName: "Usuarios",
       href: "/manage",
       sublinks: [
         { displayName: "Estudiantes", href: "/manage/students" },
         { displayName: "Profesores", href: "/manage/teachers" },
         { displayName: "Administradores", href: "/manage/admins" },
+      ],
+    },
+    {
+      displayName: "Notas",
+      href: "/manage/notes",
+      sublinks: [
+        { displayName: "Áreas", href: "/manage/notes/areas" },
+        { displayName: "Asignaturas", href: "/manage/notes/subjects" },
+        { displayName: "Logros", href: "/manage/notes/achievements" },
+        { displayName: "Competencias", href: "/manage/notes/skills" },
+        { displayName: "Casillas", href: "/manage/notes/cells" },
       ],
     },
     { displayName: "Estadisticas", href: "/stats" },
