@@ -1,6 +1,7 @@
 import RequireAuth from "./../../auth/RequireAuth";
 import Navbar from "./../../components/Navbar";
 import Main from "../../components/Main";
+import Sidebar from "./../../components/Sidebar";
 
 import "./index.css";
 
@@ -11,10 +12,7 @@ const Home = () => {
         <Navbar />
       </header>
       <Main>
-        <p>
-          This is the homepage{" "}
-          <RequireAuth allowedRoles={["admin"]}>admin user</RequireAuth>
-        </p>
+        <Sidebar />
       </Main>
     </>
   );
