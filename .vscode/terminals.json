@@ -16,6 +16,7 @@
       "icon": "server",
       "cwd": "\\Users\\GAMER\\Documents\\My Web Sites\\note-platform\\server",
       "focus": true,
+      "split": "Client",
       "command": "npm run dev"
     },
     {
