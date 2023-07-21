@@ -1,0 +1,29 @@
+{
+  "autorun": true,
+  "autokill": true,
+  "terminals": [
+    {
+      "name": "Client",
+      "description": "Termianl linked to the client-side",
+      "icon": "device-desktop",
+      "cwd": "\\Users\\GAMER\\Documents\\My Web Sites\\note-platform\\client",
+      "focus": true,
+      "command": "npm run dev"
+    },
+    {
+      "name": "Server",
+      "description": "Termianl linked to the server-side",
+      "icon": "server",
+      "cwd": "\\Users\\GAMER\\Documents\\My Web Sites\\note-platform\\server",
+      "focus": true,
+      "command": "npm run dev"
+    },
+    {
+      "name": "GitBash",
+      "description": "Gitbash terminal",
+      "icon": "git-branch",
+      "shellPath": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "profile": "git-bash"
+    }
+  ]
+}
