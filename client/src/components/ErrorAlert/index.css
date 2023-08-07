@@ -1,6 +1,9 @@
-.ErrorBox {
+.Error {
+  animation-duration: 0.5s;
+  animation-name: slidein;
+  z-index: 100;
   padding: 20px;
-  background: #f44336;
+  background: rgba(244, 67, 54, 0.8);
   display: table;
   margin-bottom: 10px;
   text-align: left;
@@ -8,12 +11,22 @@
   color: #fff;
 }
 
-.ErrorBox strong {
+.Error {
+  font-size: 1.5em;
+}
+
+.Error strong {
   font-size: 2em;
 }
 
-.ErrorBox button,
-.ErrorBox button:hover {
+.Error i {
+  font-size: 0.8em;
+  animation-duration: 1s;
+  animation-name: errorpop;
+}
+
+.Error button,
+.Error button:hover {
   margin-left: 15px;
   color: #fff;
   font-weight: bold;
@@ -25,6 +38,38 @@
   border: none;
 }
 
-.ErrorBox button:hover {
+.Error button:hover {
   color: #000;
+}
+
+.ErrorAlert {
+  position: fixed;
+  top: 20;
+  width: 50%;
+  left: 25%;
+}
+
+@keyframes slidein {
+  from {
+    top: -100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes errorpop {
+  from {
+    font-size: 0.1em;
+  }
+  to {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .ErrorAlert {
+    width: 100%;
+    left: 0;
+  }
 }

@@ -9,24 +9,25 @@ const signIn = async ({ userUsername, userPassword }) => {
       userPassword,
     });
 
-    const token = response.data.token;
-    const newUser = response.data.user;
+    const { accessToken, refreshToken, user: newUser } = response.data;
 
-    localStorage.setItem("token", token);
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("userData", JSON.stringify(newUser));
-    return { token, newUser };
+    return { accessToken, newUser };
   } catch (err) {
     throw new Error(err?.response?.data?.error || err.message);
   }
 };
 
 const signOut = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
   localStorage.removeItem("userData");
 };
 
 const isAuthenticated = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   return !!token;
 };
 

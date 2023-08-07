@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import useError from "../../hooks/useError";
 
 import "./index.css";
 import ErrorAlert from "./../../components/ErrorAlert/index";
@@ -9,33 +8,26 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useAuth();
-  const [error, showError, clearError] = useError();
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const userUsername = formData.get("username");
-    const userPassword = formData.get("password");
-
     try {
+      event.preventDefault();
+
+      const formData = new FormData(event.currentTarget);
+      const userUsername = formData.get("username");
+      const userPassword = formData.get("password");
+
       await auth.signIn({ userUsername, userPassword });
       navigate(location.state?.from || "/");
-    } catch (error) {
-      showError(error);
+    } catch (err) {
+      return;
     }
   };
 
   return (
     <div className="Login">
       <div className="login-box">
-        {error && (
-          <ErrorAlert
-            error={error.message}
-            errTitle={error.title}
-            onClose={clearError}
-          />
-        )}
+        <ErrorAlert type="ErrorBox" />
         <form onSubmit={handleSubmit} autoComplete="off">
           <h2>Ingresar a sigma</h2>
           <div className="user-box">

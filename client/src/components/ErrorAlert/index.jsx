@@ -1,20 +1,38 @@
 import PropTypes from "prop-types";
+
+import useError from "../../hooks/useError";
+
+import RecoverToken from "../RecoverToken";
+
 import "./index.css";
 
-const ErrorAlert = ({ error, errTitle, onClose }) => {
+const ErrorAlert = ({ type }) => {
+  const usedError = useError();
   return (
-    <div className="ErrorBox">
-      <button onClick={onClose}>&times;</button>
-      <strong>Ops!</strong>
-      <br />
-      {error}
-    </div>
+    <>
+      {usedError?.error && (
+        <div className={`Error ${type}`}>
+          <button onClick={usedError.clearError}>&times;</button>
+          <strong>Ops!</strong>
+          <br />
+          {useError.error?.title}
+          <i>{usedError.error.message}</i>
+          {(usedError.error.message === "su token ha expirado" ||
+            (type === "ErrorAlert" &&
+              usedError.error.message ===
+                "Credenciales Invalidas! Contraseña Incorrecta")) && (
+            <>
+              <br />
+              <RecoverToken />
+            </>
+          )}
+        </div>
+      )}
+    </>
   );
 };
 ErrorAlert.propTypes = {
-  error: PropTypes.string,
-  errTitle: PropTypes.string,
-  onClose: PropTypes.func,
+  type: PropTypes.string,
 };
 
 export default ErrorAlert;

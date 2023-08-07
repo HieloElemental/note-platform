@@ -10,7 +10,14 @@ const authenticateToken = (requiredRoles) => {
 
     try {
       jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {
-        if (err) return res.status(403).send({ error: "invalid token" });
+        if (err) {
+          if (err.name === "TokenExpiredError") {
+            return res.status(401).send({ error: "su token ha expirado" });
+          } else {
+            return res.status(403).send({ error: "invalid token" });
+          }
+        }
+
         if (requiredRoles && !requiredRoles.includes(decodedToken.role))
           return res.status(401).send({ error: "token role not allowed" });
 

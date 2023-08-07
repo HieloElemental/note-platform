@@ -1,6 +1,9 @@
 main {
   min-height: 100vh;
   padding: 80px 0 0 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
 }
 
 main::before {
@@ -20,4 +23,12 @@ main::before {
     url("https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=E747Pi0UnW7CgXINEeChLg&cb_client=maps_sv.tactile.gps&w=3840&h=2160&yaw=17.15297&pitch=0&thumbfov=100")
       fixed center center/cover;
   filter: blur(5px);
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -2,7 +2,9 @@ const usersService = require("../models/users");
 
 const { httpError } = require("../helpers/handleError");
 const { isValidString } = require("../utils/isValidValue");
+const { getPfp } = require("../utils/pfp");
 const generateAccessToken = require("../helpers/generateAccessToken");
+const generateRefreshToken = require("../helpers/generateRefreshToken");
 const { compare } = require("bcryptjs");
 
 const loginCtrl = async (req, res) => {
@@ -35,13 +37,40 @@ const loginCtrl = async (req, res) => {
         .json({ error: "Credenciales Invalidas! Contraseña Incorrecta" });
     }
 
-    const token = generateAccessToken(userId, userTypeName);
-    const user = { userId, userTypeName, userUsername };
+    const token = generateAccessToken(userId, userTypeName, userUsername);
 
-    return res.status(200).json({ token, user });
+    const user = {
+      userId,
+      userTypeName,
+      userUsername,
+    };
+
+    return res.status(200).json({ ...token, user });
   } catch (e) {
     return httpError(res, e);
   }
 };
 
-module.exports = { loginCtrl };
+const refreshTokenCtrl = async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return res.status(400).json({ error: "No refresh token provided" });
+    }
+
+    const accessToken = generateRefreshToken(refreshToken);
+
+    if (!accessToken) {
+      return res
+        .status(401)
+        .json({ error: "Invalid or expired refresh token" });
+    }
+
+    return res.status(200).json({ accessToken });
+  } catch (e) {
+    return httpError(res, e);
+  }
+};
+
+module.exports = { loginCtrl, refreshTokenCtrl };

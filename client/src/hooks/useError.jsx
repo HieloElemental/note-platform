@@ -1,17 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { ErrorContext } from "../context/ErrorProvider";
 
 const useError = () => {
-  const [error, setError] = useState("");
-
-  const showError = ({ message = "Hubo un error", title = "Ops!" }) => {
-    setError({ message, title });
-  };
-
-  const clearError = () => {
-    setError("");
-  };
-
-  return [error, showError, clearError];
+  const error = useContext(ErrorContext);
+  return error;
 };
 
 export default useError;

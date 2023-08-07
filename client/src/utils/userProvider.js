@@ -10,7 +10,7 @@ const getUserData = async ({ token }) => {
       },
     });
 
-    const userData = response.data.userData;
+    const userData = { ...response.data.userData, pfp: response.data.pfp };
     return userData;
   } catch (err) {
     throw new Error(err?.response?.data?.error || err.message);

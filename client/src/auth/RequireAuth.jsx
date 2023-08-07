@@ -7,11 +7,11 @@ const RequireAuth = ({ children, allowedRoles, redirect }) => {
   const auth = useAuth();
   const location = useLocation();
 
-  if (!auth.user) {
+  if (!auth.authUser) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (allowedRoles && !allowedRoles.includes(auth.user.userTypeName)) {
+  if (allowedRoles && !allowedRoles.includes(auth.authUser.userTypeName)) {
     if (redirect) return <Navigate to="/unauthorised" replace />;
     return <></>;
   }

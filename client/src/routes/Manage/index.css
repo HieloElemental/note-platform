@@ -1,0 +1,64 @@
+.Manage {
+  width: 60%;
+  color: #f2f2f2;
+}
+
+.Manage ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.Manage ul li {
+  list-style: none;
+  margin: 40px 10px;
+}
+
+.Manage ul li a {
+  padding: 10px;
+  color: #f2f2f2;
+  text-decoration: none;
+  border-radius: 5px;
+  background: rgb(10, 10, 10);
+}
+
+.Manage form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Manage .user-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.Manage .user-box select {
+  width: 50%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.Manage .user-box select option {
+  background: rgba(10, 10, 10, 0.8);
+}
+
+.Manage .user-box label {
+  padding: 10px 0;
+  margin-bottom: 25px;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}

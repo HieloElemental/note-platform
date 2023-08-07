@@ -1,29 +1,44 @@
 import { PropTypes } from "prop-types";
 
-import useUser from "../../hooks/useUser";
+import Card from "./../Card/index";
+import SquareImg from "./components/SquareImg";
 
-const Sidebar = ({ title }) => {
-  const user = useUser();
+import "./index.css";
 
+const Sidebar = ({ title, user }) => {
   return (
-    <section className="Sidebar">
+    <Card className="Sidebar">
       <h1>{title}</h1>
       <ul className="Userdata">
-        <li>
-          <img src="" alt="" />
+        <li className="li-img">
+          <SquareImg
+            src={`${import.meta.env.VITE_BACKEND_URL}${user?.pfp}`}
+            alt=""
+          />
         </li>
-        <li>
-          <p>
-            <strong>Nombre: </strong>
-            {user.user?.roleDisplayname}
-          </p>
-        </li>
+        {user?.roleDisplayname && (
+          <li>
+            <p>
+              <strong>Nombre: </strong>
+              {user?.roleDisplayname || "Sin Nombre"}
+            </p>
+          </li>
+        )}
+        {user?.roleLastnames && (
+          <li>
+            <p>
+              <strong>Apellidos: </strong>
+              {user?.roleLastnames || "Sin Nombre"}
+            </p>
+          </li>
+        )}
       </ul>
-    </section>
+    </Card>
   );
 };
 Sidebar.propTypes = {
   title: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default Sidebar;
