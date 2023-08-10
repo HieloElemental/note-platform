@@ -17,7 +17,7 @@ const App = () => {
             <Route
               path="/"
               element={
-                <RequireAuth>
+                <RequireAuth redirect>
                   <Home />
                 </RequireAuth>
               }
@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route
-              path="/manage"
+              path="/manage/*"
               element={
                 <RequireAuth allowedRoles={["admin"]} redirect>
                   <Manage />

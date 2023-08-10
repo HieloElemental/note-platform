@@ -3,6 +3,10 @@
   color: #f2f2f2;
 }
 
+.Manage hr {
+  width: 100%;
+}
+
 .Manage ul {
   width: 100%;
   display: flex;
@@ -15,7 +19,8 @@
   margin: 40px 10px;
 }
 
-.Manage ul li a {
+.Manage ul li a,
+.Manage table a {
   padding: 10px;
   color: #f2f2f2;
   text-decoration: none;
@@ -61,4 +66,25 @@
   color: #fff;
   pointer-events: none;
   transition: 0.5s;
+}
+
+.Manage table {
+  width: 100%;
+}
+
+.Manage table,
+.Manage table tr,
+.Manage table td {
+  border-spacing: 0;
+}
+
+.Manage table thead {
+  font-weight: bold;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 2px solid #f2f2f2;
+}
+
+.Manage table td {
+  border-bottom: 1px solid #f2f2f2;
+  padding: 10px;
 }
