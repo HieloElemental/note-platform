@@ -35,7 +35,12 @@ const loginCtrl = async (req, res) => {
         .json({ error: "Credenciales Invalidas! Contraseña Incorrecta" });
     }
 
-    const token = generateAccessToken(id, username, isStaff, userReferenceId);
+    const token = generateAccessToken({
+      id,
+      username,
+      isStaff,
+      userReferenceId,
+    });
     const user = { id, isStaff, userReferenceId, username };
 
     return res.status(200).json({ ...token, user });
