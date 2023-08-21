@@ -9,18 +9,15 @@ const { compare } = require("bcryptjs");
 
 const loginCtrl = async (req, res) => {
   try {
-    const { userUsername: user_username, userPassword: user_password } =
-      req.body;
-    const fieldsToValidate = [user_username, user_password];
-    const isValidFields = fieldsToValidate.every(isValidString);
+    const { username, password } = req.body;
 
-    if (!isValidFields) {
+    if (![username, password].every(isValidString)) {
       return res.status(400).json({
         error: "Campos Vacíos O Carácteres Inválidos En Algún Campo",
       });
     }
 
-    const logedUser = await usersService.login({ user_username });
+    const logedUser = await usersService.login({ reqUsername: username });
 
     if (!logedUser) {
       return res
@@ -28,22 +25,18 @@ const loginCtrl = async (req, res) => {
         .json({ error: "Credenciales Inválidas, Usuario No Encontrado" });
     }
 
-    const { userPassword, userId, userTypeName, userUsername } = logedUser;
+    const { password: hashedPassword, id, staffId, enrollmentId } = logedUser;
+    const isStaff = Boolean(staffId);
+    const userReferenceId = staffId || enrollmentId;
 
-    const checkPassword = await compare(user_password, userPassword);
-    if (!checkPassword) {
+    if (!(await compare(password, hashedPassword))) {
       return res
         .status(401)
         .json({ error: "Credenciales Invalidas! Contraseña Incorrecta" });
     }
 
-    const token = generateAccessToken(userId, userTypeName, userUsername);
-
-    const user = {
-      userId,
-      userTypeName,
-      userUsername,
-    };
+    const token = generateAccessToken(id, username, isStaff, userReferenceId);
+    const user = { id, isStaff, userReferenceId, username };
 
     return res.status(200).json({ ...token, user });
   } catch (e) {

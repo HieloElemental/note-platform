@@ -7,11 +7,9 @@ const T_USER_TYPES = "user_types";
 const findByUsername = async (user_username) => {
   return db(T_USERS)
     .select({
-      userId: "user_id",
-      userUsername: "user_username",
-      userUserTypeId: "user_user_type_id",
-      userTypeId: "user_type_id",
-      userTypeName: "user_type_name",
+      id: "id",
+      username: "username",
+      straffId: "staff_id",
     })
     .where({ user_username: user_username })
     .join(
@@ -72,23 +70,16 @@ const getUserData = async (id) => {
   }
 };
 
-const login = async ({ user_username }) => {
+const login = async ({ reqUsername }) => {
   return db(T_USERS)
     .select({
-      userId: "user_id",
-      userUsername: "user_username",
-      userUserTypeId: "user_user_type_id",
-      userTypeId: "user_type_id",
-      userTypeName: "user_type_name",
-      userPassword: "user_password",
+      id: "id",
+      username: "username",
+      staffId: "staff_id",
+      enrollmentId: "enrollment_id",
+      password: "user_password",
     })
-    .where({ user_username })
-    .join(
-      T_USER_TYPES,
-      `${T_USER_TYPES}.user_type_id`,
-      "=",
-      `${T_USERS}.user_user_type_id`
-    )
+    .where({ username: reqUsername })
     .first();
 };
 

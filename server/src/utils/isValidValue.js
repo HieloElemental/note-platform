@@ -1,9 +1,9 @@
-const isValidString = (str) => {
-  if (!str || typeof str !== "string") {
-    return false;
+const isValidString = (str, canBeNull = false) => {
+  if (canBeNull && !str) {
+    return true;
   }
-  const normalCharactersPattern = /^[a-zA-Z0-9\sñÑ]+$/;
-  return normalCharactersPattern.test(str);
+
+  return typeof str === "string" && /^[a-zA-Z0-9\sñÑ]+$/.test(str);
 };
 
 module.exports = {

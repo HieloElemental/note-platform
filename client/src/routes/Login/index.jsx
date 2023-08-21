@@ -3,21 +3,21 @@ import useAuth from "../../hooks/useAuth";
 
 import "./index.css";
 import ErrorAlert from "./../../components/ErrorAlert/index";
+import GeneralForm from "../../components/GeneralForm";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useAuth();
+  const loginFields = [
+    { type: "text", name: "username", label: "Usuario", required: true },
+    { type: "password", name: "password", label: "Contraseña", required: true },
+  ];
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (formData) => {
     try {
-      event.preventDefault();
-
-      const formData = new FormData(event.currentTarget);
-      const userUsername = formData.get("username");
-      const userPassword = formData.get("password");
-
-      await auth.signIn({ userUsername, userPassword });
+      const { username, password } = formData;
+      await auth.signIn({ username, password });
       navigate(location.state?.from || "/");
     } catch (err) {
       return;
@@ -28,18 +28,9 @@ const Login = () => {
     <div className="Login">
       <div className="login-box">
         <ErrorAlert type="ErrorBox" />
-        <form onSubmit={handleSubmit} autoComplete="off">
-          <h2>Ingresar a sigma</h2>
-          <div className="user-box">
-            <input type="text" name="username" required />
-            <label>Usuario</label>
-          </div>
-          <div className="user-box">
-            <input type="password" name="password" required />
-            <label>Contraseña</label>
-          </div>
-          <button className="login-btn">Ingresar</button>
-        </form>
+        <GeneralForm fields={loginFields} onSubmit={handleSubmit}>
+          <h2>Ingresar</h2>
+        </GeneralForm>
       </div>
     </div>
   );
