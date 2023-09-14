@@ -553,7 +553,7 @@ CREATE TABLE
     notes (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         cell_id INT UNSIGNED NOT NULL,
-        enrollment_id NOT NULL,
+        enrollment_id INT UNSIGNED NOT NULL,
         note_value INT UNSIGNED NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (cell_id) REFERENCES cells (id),
