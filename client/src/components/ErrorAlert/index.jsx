@@ -20,7 +20,10 @@ const ErrorAlert = ({ type }) => {
           {(usedError.error.message === "su token ha expirado" ||
             (type === "ErrorAlert" &&
               usedError.error.message ===
-                "Credenciales Invalidas! Contraseña Incorrecta")) && (
+                "Credenciales Invalidas! Contraseña Incorrecta") ||
+            (type === "ErrorAlert" &&
+              usedError.error.message ===
+                "Campos Vacíos O Carácteres Inválidos En Algún Campo")) && (
             <>
               <br />
               <RecoverToken />

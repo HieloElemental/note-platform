@@ -21,8 +21,7 @@ const authenticateToken = (requiredRoles) => {
         if (requiredRoles && !requiredRoles.includes(decodedToken.role))
           return res.status(401).send({ error: "token role not allowed" });
 
-        req.id = decodedToken.id;
-        req.role = decodedToken.role;
+        req.body = decodedToken;
 
         next();
       });

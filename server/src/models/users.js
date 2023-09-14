@@ -1,5 +1,6 @@
 const db = require("../config/db");
 const adminsService = require("./admins");
+const staffService = require("./staff");
 
 const T_USERS = "users";
 const T_USER_TYPES = "user_types";
@@ -24,45 +25,26 @@ const findByUsername = async (user_username) => {
 const findByUserId = async (id) => {
   return db(T_USERS)
     .select({
-      userId: "user_id",
-      userUsername: "user_username",
-      userUserTypeId: "user_user_type_id",
-      userTypeId: "user_type_id",
-      userTypeName: "user_type_name",
+      id: "id",
+      username: "username",
+      staffId: "staff_id",
+      enrollmentId: "enrollment_id",
+      password: "user_password",
     })
-    .where({ user_id: id })
-    .join(
-      T_USER_TYPES,
-      `${T_USER_TYPES}.user_type_id`,
-      "=",
-      `${T_USERS}.user_user_type_id`
-    )
+    .where({ id })
     .first();
 };
 
-const getUserData = async (id) => {
+const getStaffUserData = async (id) => {
   try {
     let userData = {};
     await db.transaction(async (trx) => {
       // Get the user
       const user = await findByUserId(id);
-
-      // Get the role info
-      if (user.userTypeName === "admin") {
-        const admin = await adminsService.findAdminByUserId(user.userId);
-        userData = admin;
-      } else if (user.userTypeName === "teacher") {
-        const teacher = await teachersService.readTeacher({
-          teacher_user_id: user.userId,
-        });
-        userData = teacher;
-      } else if (user.userTypeName === "student") {
-        const student = await studentsService.readStudent({
-          student_user_id: user.userId,
-        });
-        userData = student;
-      }
+      const staff = await staffService.findStaffByUserId(user.id);
+      userData = staff;
     });
+    console.log(userData);
 
     return userData;
   } catch (error) {
@@ -89,7 +71,7 @@ const createUser = async (userData) => {
 
 module.exports = {
   findByUsername,
-  getUserData,
+  getStaffUserData,
   createUser,
   login,
 };

@@ -6,17 +6,13 @@ const generateAccessToken = (data) => {
       expiresIn: "1h",
     });
 
-    const refreshToken = jwt.sign(
-      { id: id },
-      process.env.REFRESH_TOKEN_SECRET,
-      {
-        expiresIn: "7d",
-      }
-    );
+    const refreshToken = jwt.sign(data, process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: "7d",
+    });
 
     return { accessToken, refreshToken };
   } catch (err) {
-    return new Error(err.message);
+    throw new Error(err.message);
   }
 };
 

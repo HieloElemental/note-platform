@@ -28,7 +28,11 @@ const Login = () => {
     <div className="Login">
       <div className="login-box">
         <ErrorAlert type="ErrorBox" />
-        <GeneralForm fields={loginFields} onSubmit={handleSubmit}>
+        <GeneralForm
+          fields={loginFields}
+          onSubmit={handleSubmit}
+          btn={{ type: "neon" }}
+        >
           <h2>Ingresar</h2>
         </GeneralForm>
       </div>

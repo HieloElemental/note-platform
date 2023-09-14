@@ -3,7 +3,13 @@ import { PropTypes } from "prop-types";
 
 import "./index.css";
 
-const GeneralForm = ({ fields, onSubmit, children }) => {
+const GeneralForm = ({
+  fields,
+  onSubmit,
+  children,
+  type,
+  btn = { type: "", name: "Enviar" },
+}) => {
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
@@ -20,7 +26,11 @@ const GeneralForm = ({ fields, onSubmit, children }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off" className="GeneralForm">
+    <form
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      className={`GeneralForm ${type ? type : ""}`}
+    >
       {children}
       {fields.map((field, index) => (
         <div key={index} className="GeneralForm-field-box">
@@ -48,7 +58,9 @@ const GeneralForm = ({ fields, onSubmit, children }) => {
           <label>{field.label}</label>
         </div>
       ))}
-      <button className="GeneralForm-btn">Enviar</button>
+      <button className={`GeneralForm-btn ${btn.type ? btn.type : ""}`}>
+        {name || "Enviar"}
+      </button>
     </form>
   );
 };
@@ -68,7 +80,12 @@ GeneralForm.propTypes = {
       ),
     })
   ).isRequired,
+  btn: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+  }),
   onSubmit: PropTypes.func.isRequired,
+  type: PropTypes.string,
 };
 
 export default GeneralForm;

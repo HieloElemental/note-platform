@@ -1,9 +1,16 @@
 .GeneralForm {
+  padding-top: 10px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.GeneralForm.on-line {
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: row;
 }
 
 .GeneralForm h2 {
@@ -13,12 +20,12 @@
   text-align: center;
 }
 
-.GeneralForm-field-box {
+.GeneralForm .GeneralForm-field-box {
   position: relative;
   width: 100%;
 }
 
-.GeneralForm-field-box input {
+.GeneralForm .GeneralForm-field-box input {
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
@@ -30,7 +37,11 @@
   background: transparent;
 }
 
-.GeneralForm-field-box label {
+.GeneralForm.on-line .GeneralForm-field-box {
+  width: 60%;
+}
+
+.GeneralForm .GeneralForm-field-box label {
   position: absolute;
   top: 0;
   left: 0;
@@ -41,33 +52,41 @@
   transition: 0.5s;
 }
 
-.GeneralForm-field-box input:focus ~ label,
-.GeneralForm-field-box input:valid ~ label {
+.GeneralForm .GeneralForm-field-box input:focus ~ label,
+.GeneralForm .GeneralForm-field-box input:valid ~ label {
   top: -20px;
   left: 0;
   color: #03e9f4;
   font-size: 12px;
 }
 
-.GeneralForm-btn {
+.GeneralForm .GeneralForm-btn {
   position: relative;
   display: inline-block;
   background: transparent;
-  border: 3px solid #03e9f4;
-  padding: 10px 20px;
-  color: #03e9f4;
-  font-size: 16px;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin-top: 40px;
+  font-size: 16px;
   letter-spacing: 4px;
   outline: none;
   border-radius: 10px;
+  padding: 10px 20px;
 }
 
-.GeneralForm-btn:hover {
+.GeneralForm .GeneralForm-btn.neon {
+  border: 3px solid #03e9f4;
+  color: #03e9f4;
+  margin: 40px 0 10px 0;
+}
+
+.GeneralForm .GeneralForm-btn:hover {
+  color: #000;
+  background: #fff;
+}
+
+.GeneralForm .GeneralForm-btn.neon:hover {
   background: #03e9f4;
   color: #222;
   border-radius: 5px;

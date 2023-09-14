@@ -2,21 +2,23 @@ import useAuth from "../../hooks/useAuth";
 import useError from "../../hooks/useError";
 
 import "./index.css";
+import GeneralForm from "./../GeneralForm/index";
 
 const Login = () => {
   const auth = useAuth();
   const usedError = useError();
 
-  const handleSubmit = async (event) => {
-    try {
-      event.preventDefault();
+  const passwordRecoveryFields = [
+    { type: "password", name: "password", required: true, label: "Contraseña" },
+  ];
 
-      const formData = new FormData(event.currentTarget);
-      const userPassword = formData.get("password");
+  const handleSubmit = async (formData) => {
+    try {
+      const { password } = formData;
 
       const sign = await auth.signIn({
-        userUsername: auth.authUser.userUsername,
-        userPassword,
+        username: auth.authUser.username,
+        password,
       });
       sign && usedError.clearError();
     } catch (err) {
@@ -26,13 +28,11 @@ const Login = () => {
 
   return (
     <div className="Recover">
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <div className="user-box">
-          <input type="password" name="password" required />
-          <label>Contraseña</label>
-        </div>
-        <button className="login-btn">Recuperar</button>
-      </form>
+      <GeneralForm
+        fields={passwordRecoveryFields}
+        onSubmit={handleSubmit}
+        type="on-line"
+      />
     </div>
   );
 };

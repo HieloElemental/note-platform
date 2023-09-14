@@ -23,6 +23,7 @@ const AuthProvider = ({ children }) => {
       const { accessToken, newUser } = await authProvider.signIn(signInParams);
       user.getUserData(accessToken);
       setAuthUser({ ...newUser, accessToken });
+      usedError.clearError();
       return true;
     } catch (err) {
       usedError.showError(err);
