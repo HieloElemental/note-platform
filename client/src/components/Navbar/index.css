@@ -4,47 +4,48 @@
   left: 0;
   z-index: 10;
   width: 100%;
-  height: 70px;
+  height: 60px;
   background: #2f2f2f;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-direction: column;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .Navbar-navbar {
   height: 100%;
+  width: 100%;
   max-width: 1250px;
-  margin: auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0 50px;
 }
 
 .Navbar-navbar > .Navbar-links {
   display: flex;
   height: 100%;
-  line-height: 70px;
+  line-height: 60px;
 }
 
 .Navbar-navbar .Navbar-links li {
   list-style: none;
+  font-size: 15px;
 }
 
 .Navbar-navbar .Navbar-logo a {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 600;
 }
 
 .Navbar a {
   color: #fff;
   text-decoration: none;
-  padding: 0 10px;
 }
 
 .Navbar-navbar li div {
-  height: 70px;
+  height: 60px;
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -61,6 +62,7 @@
 .Navbar-navbar i svg {
   z-index: 11;
   height: 34%;
+  width: 20px;
   filter: invert();
   transition: all 0.3s ease;
 }
@@ -79,7 +81,7 @@
 
 .Navbar ul ul {
   position: absolute;
-  top: 70px;
+  top: 60px;
   left: 0;
   background: #2f2f2f;
   padding: 0 10px;
@@ -103,7 +105,7 @@ li.Navbar-open {
   padding: 0;
   display: none;
   height: 100%;
-  width: 70px;
+  width: 60px;
 }
 
 li.Navbar-open svg,
@@ -139,7 +141,7 @@ svg.open path:nth-child(3) {
     margin-top: 0;
     position: fixed;
     background: #2f2f2f;
-    top: 70px;
+    top: 60px;
     left: -450px;
     z-index: 999;
     display: flex !important;

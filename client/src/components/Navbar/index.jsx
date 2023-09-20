@@ -7,32 +7,87 @@ import MenuIcon from "./assets/MenuIcon";
 import "./index.css";
 
 const navbarLinks = {
-  admin: [
-    { displayName: "Inicio", href: "/" },
+  modules: [
     {
-      displayName: "Usuarios",
-      href: "/manage",
+      displayName: "Académico",
+      href: "/academic-management",
       sublinks: [
-        { displayName: "Estudiantes", href: "/manage/students" },
-        { displayName: "Profesores", href: "/manage/teachers" },
-        { displayName: "Administradores", href: "/manage/admins" },
+        { displayName: "Matrícula", href: "/enrollment", name: "enrollment" },
+        {
+          displayName: "Inscripciones",
+          href: "/enrollments",
+          name: "enrollments",
+        },
+        { displayName: "Promoción", href: "/promotion", name: "promotion" },
+        { displayName: "Académico", href: "/academic", name: "academic" },
+        { displayName: "Asignación", href: "/assignment", name: "assignment" },
       ],
     },
     {
-      displayName: "Notas",
-      href: "/manage/notes",
+      displayName: "Institucional",
+      title: "Configuración Institucional",
+      href: "/institutional-configuration",
       sublinks: [
-        { displayName: "Áreas", href: "/manage/notes/areas" },
-        { displayName: "Asignaturas", href: "/manage/notes/subjects" },
-        { displayName: "Logros", href: "/manage/notes/achievements" },
-        { displayName: "Competencias", href: "/manage/notes/skills" },
-        { displayName: "Casillas", href: "/manage/notes/cells" },
+        {
+          displayName: "Institución (Información General)",
+          href: "/general-institution",
+          name: "general-institution",
+        },
+        {
+          displayName: "Institución (Grupos y Dificultades)",
+          href: "/institution-groups",
+          name: "institution-groups",
+        },
+        {
+          displayName: "Periodos y Vigencias",
+          href: "/periods-and-dates",
+          name: "periods-and-dates",
+        },
+        {
+          displayName: "Variables Globales",
+          href: "/global-variables",
+          name: "global-variables",
+        },
       ],
     },
-    { displayName: "Estadisticas", href: "/stats" },
+    {
+      displayName: "Informes",
+      href: "/reports",
+      sublinks: [
+        {
+          displayName: "Generación de Informes",
+          href: "/report-generation",
+          name: "report-generation",
+        },
+      ],
+    },
+    {
+      displayName: "Seguimiento",
+      href: "/student-tracking",
+      sublinks: [
+        { displayName: "Seguimiento", href: "#tracking", name: "tracking" },
+        {
+          displayName: "Salidas-Asistencias",
+          href: "/attendance",
+          name: "attendance",
+        },
+        { displayName: "Hoja de Vida", href: "#resume", name: "resume" },
+        {
+          displayName: "Anotaciones",
+          href: "/annotations",
+          name: "annotations",
+        },
+      ],
+    },
+    {
+      displayName: "Personal",
+      href: "/staff-management",
+      sublinks: [
+        { displayName: "Personal", href: "/staff", name: "staff" },
+        { displayName: "Documentos", href: "/documents", name: "documents" },
+      ],
+    },
   ],
-  teacher: [],
-  student: [],
   last: [{ displayName: "Salir", href: "/logout" }],
 };
 
@@ -52,7 +107,7 @@ const Navbar = () => {
       <>
         {links.map((link, index) => (
           <li key={index}>
-            <div className=".Navbar-fake-a">
+            <div>
               <Link to={link.href}>{link.displayName}</Link>
               {link.sublinks && (
                 <i onClick={() => showSubLinkHandler(link.displayName)}>
@@ -63,7 +118,7 @@ const Navbar = () => {
               )}
             </div>
             {link.sublinks && showSublinks[link.displayName] && (
-              <ul className="Navbar-links">
+              <ul className='Navbar-links'>
                 {renderNavbarLinks(link.sublinks)}
               </ul>
             )}
@@ -78,24 +133,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="Navbar">
-      <div className="Navbar-navbar">
-        <li className="Navbar-logo">
-          <Link to="/">Colegio Empresarial</Link>
+    <nav className='Navbar'>
+      <div className='Navbar-navbar'>
+        <li className='Navbar-logo'>
+          <Link to='/'>Colegio Empresarial</Link>
         </li>
         <ul className={`Navbar-links ${showMobileMenu ? "show" : ""}`}>
-          <RequireAuth allowedRoles={["admin"]}>
-            {renderNavbarLinks(navbarLinks.admin)}
-          </RequireAuth>
-          <RequireAuth allowedRoles={["teacher"]}>
-            {renderNavbarLinks(navbarLinks.teacher)}
-          </RequireAuth>
-          <RequireAuth allowedRoles={["student"]}>
-            {renderNavbarLinks(navbarLinks.student)}
-          </RequireAuth>
+          {renderNavbarLinks(navbarLinks.modules)}
           {renderNavbarLinks(navbarLinks.last)}
         </ul>
-        <li className="Navbar-open" onClick={toggleMobileMenu}>
+        <li className='Navbar-open' onClick={toggleMobileMenu}>
           <i>
             <MenuIcon className={showMobileMenu ? "open" : ""} />
           </i>
