@@ -1,6 +1,11 @@
 const usersService = require("../models/users");
+const staffService = require("../models/staff");
 
-const { httpError } = require("../helpers/handleError");
+const {
+  handleBadRequest,
+  handleServerError,
+  handleUnauthorized,
+} = require("../helpers/handleError");
 const { isValidString } = require("../utils/isValidValue");
 const { getPfp } = require("../utils/pfp");
 const generateAccessToken = require("../helpers/generateAccessToken");
@@ -11,18 +16,17 @@ const loginCtrl = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    if (![username, password].every(isValidString)) {
-      return res.status(400).json({
-        error: "Campos Vacíos O Carácteres Inválidos En Algún Campo",
-      });
+    if (!isValidInput(username, password)) {
+      return handleBadRequest(
+        res,
+        "Campos Vacíos O Carácteres Inválidos En Algún Campo"
+      );
     }
 
     const logedUser = await usersService.login({ reqUsername: username });
 
     if (!logedUser) {
-      return res
-        .status(401)
-        .json({ error: "Credenciales Inválidas, Usuario No Encontrado" });
+      return handleUnauthorized(res, "Credenciales Inválidas!");
     }
 
     const { password: hashedPassword, id, staffId, enrollmentId } = logedUser;
@@ -30,17 +34,27 @@ const loginCtrl = async (req, res) => {
     const userReferenceId = staffId || enrollmentId;
 
     if (!(await compare(password, hashedPassword))) {
-      return res
-        .status(401)
-        .json({ error: "Credenciales Invalidas! Contraseña Incorrecta" });
+      return handleUnauthorized(res, "Credenciales Invalidas!");
+    }
+
+    let extraInfo = {};
+
+    if (isStaff) {
+      extraInfo = await getStaffInfo(id);
+      if (!extraInfo) {
+        return handleUnauthorized(res, "No Encontrada información del usuario");
+      }
+    } else {
+      // Handle non-staff user (e.g., enrollment)
+      // const logedEnrollment = await true; //TODO: make the enrollment model
     }
 
     const user = { id, isStaff, userReferenceId, username };
-    const token = await generateAccessToken(user);
+    const token = await generateAccessToken({ ...user, ...extraInfo });
 
     return res.status(200).json({ ...token, user });
-  } catch (e) {
-    return httpError(res, e);
+  } catch (error) {
+    return handleServerError(res, error);
   }
 };
 
@@ -49,21 +63,28 @@ const refreshTokenCtrl = async (req, res) => {
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
-      return res.status(400).json({ error: "No refresh token provided" });
+      return handleBadRequest(req, "No refresh token provided");
     }
 
     const accessToken = generateRefreshToken(refreshToken);
 
     if (!accessToken) {
-      return res
-        .status(401)
-        .json({ error: "Invalid or expired refresh token" });
+      return handleUnauthorized(res, "Invalid or expired refresh token");
     }
 
     return res.status(200).json({ accessToken });
-  } catch (e) {
-    return httpError(res, e);
+  } catch (error) {
+    return handleServerError(res, error);
   }
+};
+
+const isValidInput = (username, password) => {
+  return [username, password].every(isValidString);
+};
+
+const getStaffInfo = async (userId) => {
+  const staffInfo = await staffService.findStaffByUserId(userId);
+  return staffInfo;
 };
 
 module.exports = { loginCtrl, refreshTokenCtrl };

@@ -338,6 +338,7 @@ CREATE TABLE
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         position_name VARCHAR(50) NOT NULL,
         required_data_format TEXT,
+        allowed_modules TEXT,
         is_admin BOOLEAN NOT NULL,
         PRIMARY KEY (id)
     );

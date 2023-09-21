@@ -39,10 +39,9 @@ const getStaffUserData = async (id) => {
   try {
     let userData = {};
     await db.transaction(async (trx) => {
-      // Get the user
       const user = await findByUserId(id);
       const staff = await staffService.findStaffByUserId(user.id);
-      userData = staff;
+      userData = { ...staff, ...user };
     });
     console.log(userData);
 
