@@ -5,7 +5,7 @@ import { ErrorProvider } from "./context/ErrorProvider";
 import RequireAuth from "./auth/RequireAuth";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
-import Manage from "./routes/Manage";
+import Staff from "./routes/Staff";
 import Logout from "./components/Logout";
 
 const App = () => {
@@ -15,25 +15,25 @@ const App = () => {
         <AuthProvider>
           <Routes>
             <Route
-              path="/"
+              path='/'
               element={
                 <RequireAuth redirect>
                   <Home />
                 </RequireAuth>
               }
             />
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
             <Route
-              path="/manage/*"
+              path='/staff'
               element={
-                <RequireAuth allowedRoles={["admin"]} redirect>
-                  <Manage />
+                <RequireAuth redirect>
+                  <Staff />
                 </RequireAuth>
               }
             />
             <Route
-              path="/protected"
+              path='/protected'
               element={
                 <RequireAuth allowedRoles={["teacher", "admin"]} redirect>
                   <h1>This Page is protected</h1>

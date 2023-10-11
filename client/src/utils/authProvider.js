@@ -4,7 +4,6 @@ const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const signIn = async ({ username, password }) => {
   try {
-    console.log("arrived here");
     const response = await axios.post(`${API_BASE_URL}/auth/login`, {
       username,
       password,

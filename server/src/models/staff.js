@@ -46,11 +46,20 @@ const findStaffByUserId = (userId) => {
         `${T_STAFF}.marital_status_id`
       )
       .first();
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const listStaff = () => {
+  try {
+    return db(T_STAFF);
+  } catch (error) {
+    throw error;
   }
 };
 
 module.exports = {
   findStaffByUserId,
+  listStaff,
 };

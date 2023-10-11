@@ -3,8 +3,8 @@ import useUser from "../../../../hooks/useUser";
 import Main from "../../../../components/Main/index";
 import ErrorAlert from "../../../../components/ErrorAlert";
 import Navbar from "../../../../components/Navbar";
-import Sidebar from "./../../../../components/Sidebar/index";
-import Card from "./../../../../components/Card/index";
+import Sidebar from "../../../../components/Sidebar/index";
+import Card from "../../../../components/Card/index";
 
 import fakeUsersProvider from "../../../../utils/fakeUsersProvider";
 
@@ -15,7 +15,7 @@ const Teachers = () => {
 
   return (
     <>
-      <ErrorAlert type="ErrorAlert" />
+      <ErrorAlert type='ErrorAlert' />
       <header>
         <Navbar />
       </header>
@@ -24,11 +24,11 @@ const Teachers = () => {
           user={user?.userData}
           title={user?.userData?.roleDisplayname}
         />
-        <Card className="Manage Admins">
+        <Card className='Manage Admins'>
           <h1>Manejar Profesores</h1>
           <ul>
             <li>
-              <a href="#">Agregar</a>
+              <a href='#'>Agregar</a>
             </li>
           </ul>
           {teacherUsers && (
@@ -38,7 +38,7 @@ const Teachers = () => {
               <table>
                 <thead>
                   <tr>
-                    <td width="70%">Nombre</td>
+                    <td width='70%'>Nombre</td>
                     <td>Ver</td>
                     <td>Editar</td>
                     <td>Eliminar</td>
@@ -50,13 +50,13 @@ const Teachers = () => {
                       <tr key={i}>
                         <td>{teacherUser.userDisplayname}</td>
                         <td>
-                          <a href="#">&#128269;</a>
+                          <a href='#'>&#128269;</a>
                         </td>
                         <td>
-                          <a href="#">&#9999;&#65039;</a>
+                          <a href='#'>&#9999;&#65039;</a>
                         </td>
                         <td>
-                          <a href="#">&#10060;</a>
+                          <a href='#'>&#10060;</a>
                         </td>
                       </tr>
                     );

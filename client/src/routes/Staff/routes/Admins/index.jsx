@@ -5,8 +5,8 @@ import useUser from "../../../../hooks/useUser";
 import Main from "../../../../components/Main/index";
 import ErrorAlert from "../../../../components/ErrorAlert";
 import Navbar from "../../../../components/Navbar";
-import Sidebar from "./../../../../components/Sidebar/index";
-import Card from "./../../../../components/Card/index";
+import Sidebar from "../../../../components/Sidebar/index";
+import Card from "../../../../components/Card/index";
 
 import fakeUsersProvider from "../../../../utils/fakeUsersProvider";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const Admins = () => {
 
   return (
     <>
-      <ErrorAlert type="ErrorAlert" />
+      <ErrorAlert type='ErrorAlert' />
       <header>
         <Navbar />
       </header>
@@ -35,11 +35,11 @@ const Admins = () => {
               : user?.userData?.roleDisplayname
           }
         />
-        <Card className="Manage Admins">
+        <Card className='Manage Admins'>
           <h1>Manejar Administradores</h1>
           <ul>
             <li>
-              <a href="#">Agregar</a>
+              <a href='#'>Agregar</a>
             </li>
           </ul>
           {adminUsers && (
@@ -49,7 +49,7 @@ const Admins = () => {
               <table>
                 <thead>
                   <tr>
-                    <td width="70%">Nombre</td>
+                    <td width='70%'>Nombre</td>
                     <td>Ver</td>
                     <td>Editar</td>
                     <td>Eliminar</td>
@@ -69,7 +69,7 @@ const Admins = () => {
                           <Link>&#9999;&#65039;</Link>
                         </td>
                         <td>
-                          <a href="#">&#10060;</a>
+                          <a href='#'>&#10060;</a>
                         </td>
                       </tr>
                     );
