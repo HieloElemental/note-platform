@@ -14,21 +14,21 @@ CREATE TABLE
         validity_start DATE,
         validity_end DATE,
         /* Evaluative System */
-        sytem_name VARCHAR(50) NOT NULL,
+        system_name VARCHAR(50) NOT NULL,
         scale TINYINT NOT NULL,
-        minimum_aprove TINYINT NOT NULL,
-        has_1290_decret BOOLEAN NOT NULL,
-        minimum_lost_ammount TINYINT NOT NULL,
+        minimum_approve TINYINT NOT NULL,
+        has_1290_decrete BOOLEAN NOT NULL,
+        minimum_lost_amount TINYINT NOT NULL,
         area_or_subject BOOLEAN NOT NULL,
         remedial_clases_by_skills BOOLEAN NOT NULL,
         remedial_note_limited BOOLEAN NOT NULL,
-        force_definitive_remedials BOOLEAN NOT NULL,
+        force_definitive_remedial BOOLEAN NOT NULL,
         calculate_areas_with_subjects_lost BOOLEAN NOT NULL,
-        promedy_achivements_on_report BOOLEAN NOT NULL,
+        average_achievements_on_report BOOLEAN NOT NULL,
         /* Options */
         validity_use VARCHAR(20) NOT NULL,
-        enable_achivements BOOLEAN NOT NULL,
-        achivement_and_skills_by_group BOOLEAN NOT NULL,
+        enable_achievements BOOLEAN NOT NULL,
+        achievement_and_skills_by_group BOOLEAN NOT NULL,
         enable_monitoring BOOLEAN NOT NULL,
         weight_subjects BOOLEAN NOT NULL,
         weight_evaluations BOOLEAN NOT NULL,
@@ -46,9 +46,9 @@ CREATE TABLE
     evaluation_system (
         id INT UNSIGNED NOT NULL,
         validity_id INT UNSIGNED NOT NULL,
-        cualitative VARCHAR(10) NOT NULL,
-        exaluation_name VARCHAR(50) NOT NULL,
-        cuantitative FLOAT NOT NULL,
+        qualitative VARCHAR(10) NOT NULL,
+        evaluation_name VARCHAR(50) NOT NULL,
+        quantitative FLOAT NOT NULL,
         minimum FLOAT NOT NULL,
         maximum FLOAT NOT NULL,
         evaluation_percentage FLOAT NOT NULL,
@@ -175,7 +175,7 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    educational_backgrouns (
+    educational_backgrounds (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         background_name VARCHAR(200) NOT NULL,
         PRIMARY KEY (id)
@@ -245,7 +245,7 @@ CREATE TABLE
         phone VARCHAR(20),
         telephone VARCHAR(20),
         email VARCHAR(50),
-        home_adress VARCHAR(200),
+        home_address VARCHAR(200),
         PRIMARY KEY (id)
     );
 
@@ -258,8 +258,8 @@ CREATE TABLE
         is_active BOOLEAN NOT NULL,
         first_name VARCHAR(100) NOT NULL,
         second_name VARCHAR(100),
-        first_lastname VARCHAR(100) NOT NULL,
-        second_lastname VARCHAR(100),
+        first_last_name VARCHAR(100) NOT NULL,
+        second_last_name VARCHAR(100),
         /* Identification/Document */
         identification_type_id INT UNSIGNED NOT NULL,
         identification_number VARCHAR(20) NOT NULL,
@@ -287,7 +287,7 @@ CREATE TABLE
         sisben VARCHAR(10),
         sisben_points VARCHAR(10),
         eps VARCHAR(50),
-        suffered_dieases VARCHAR(255),
+        suffered_diseases VARCHAR(255),
         disability_id INT UNSIGNED,
         disability_type VARCHAR(255),
         /* Keys */
@@ -324,8 +324,8 @@ CREATE TABLE
     attendants (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         enrollment_id INT UNSIGNED NOT NULL,
-        firstname VARCHAR(100) NOT NULL,
-        lastnames VARCHAR(200) NOT NULL,
+        first_name VARCHAR(100) NOT NULL,
+        last_names VARCHAR(200) NOT NULL,
         date_of_birth DATE NOT NULL,
         contact_data_id INT UNSIGNED,
         PRIMARY KEY (id),
@@ -349,8 +349,8 @@ CREATE TABLE
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         first_name VARCHAR(100) NOT NULL,
         second_name VARCHAR(100),
-        first_lastname VARCHAR(100) NOT NULL,
-        second_lastname VARCHAR(100),
+        first_last_name VARCHAR(100) NOT NULL,
+        second_last_name VARCHAR(100),
         /* Document */
         identification_type_id INT UNSIGNED NOT NULL,
         identification_number VARCHAR(20) NOT NULL,
@@ -411,17 +411,17 @@ CREATE TABLE
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         reservation_start DATETIME NOT NULL,
         reservation_end DATETIME NOT NULL,
-        reservated_resource_id INT UNSIGNED,
-        reservated_space_id INT UNSIGNED,
-        staff_reservator_id INT UNSIGNED,
+        reserved_resource_id INT UNSIGNED,
+        reserved_space_id INT UNSIGNED,
+        staff_reserver_id INT UNSIGNED,
         PRIMARY KEY (id),
-        FOREIGN KEY (reservated_resource_id) REFERENCES teaching_resources (id),
-        FOREIGN KEY (reservated_space_id) REFERENCES teaching_spaces (id),
-        FOREIGN KEY (staff_reservator_id) REFERENCES valid_staff (id)
+        FOREIGN KEY (reserved_resource_id) REFERENCES teaching_resources (id),
+        FOREIGN KEY (reserved_space_id) REFERENCES teaching_spaces (id),
+        FOREIGN KEY (staff_reserver_id) REFERENCES valid_staff (id)
     );
 
 CREATE TABLE
-    jouney_sessions (
+    journey_sessions (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         session_name VARCHAR(50) NOT NULL,
         PRIMARY KEY (id)
@@ -445,26 +445,26 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    classgroups (
+    class_groups (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         validity_id INT UNSIGNED NOT NULL,
-        jouney_session_id INT UNSIGNED NOT NULL,
+        journey_session_id INT UNSIGNED NOT NULL,
         grade_id INT UNSIGNED NOT NULL,
         group_letter VARCHAR(3) NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (validity_id) REFERENCES validities (id),
-        FOREIGN KEY (jouney_session_id) REFERENCES jouney_sessions (id),
+        FOREIGN KEY (journey_session_id) REFERENCES journey_sessions (id),
         FOREIGN KEY (grade_id) REFERENCES grades (id)
     );
 
 CREATE TABLE
-    classgroup_partitions (
+    class_group_partitions (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         partition_number INT UNSIGNED NOT NULL,
         partition_name VARCHAR(20) NOT NULL,
-        classgroup_id INT UNSIGNED NOT NULL,
+        class_group_id INT UNSIGNED NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (classgroup_id) REFERENCES classgroups (id)
+        FOREIGN KEY (class_group_id) REFERENCES class_groups (id)
     );
 
 CREATE TABLE
@@ -483,15 +483,15 @@ CREATE TABLE
         subject_name VARCHAR(200) NOT NULL,
         short_name VARCHAR(100),
         subject_order INT UNSIGNED NOT NULL,
-        is_reinforceable BOOLEAN NOT NULL,
-        is_cualitative BOOLEAN NOT NULL,
+        is_renewable BOOLEAN NOT NULL,
+        is_qualitative BOOLEAN NOT NULL,
         is_active BOOLEAN NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (area_id) REFERENCES areas (id)
     );
 
 CREATE TABLE
-    asignations (
+    assignations (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         staff_id INT UNSIGNED NOT NULL,
         subject_id INT UNSIGNED NOT NULL,
@@ -500,17 +500,17 @@ CREATE TABLE
         PRIMARY KEY (id),
         FOREIGN KEY (staff_id) REFERENCES valid_staff (id),
         FOREIGN KEY (subject_id) REFERENCES subjects (id),
-        FOREIGN KEY (partition_id) REFERENCES classgroup_partitions (id),
+        FOREIGN KEY (partition_id) REFERENCES class_group_partitions (id),
         FOREIGN KEY (modality_id) REFERENCES modalities (id)
     );
 
 CREATE TABLE
     class_journal (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-        asignation_id INT UNSIGNED NOT NULL,
+        assignation_id INT UNSIGNED NOT NULL,
         class_number INT UNSIGNED NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (asignation_id) REFERENCES asignations (id)
+        FOREIGN KEY (assignation_id) REFERENCES assignations (id)
     );
 
 CREATE TABLE
@@ -578,7 +578,7 @@ VALUES
 INSERT INTO
     staff (
         first_name,
-        first_lastname,
+        first_last_name,
         identification_type_id,
         identification_number,
         position_id

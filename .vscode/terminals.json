@@ -6,7 +6,7 @@
       "name": "Client",
       "description": "Termianl linked to the client-side",
       "icon": "device-desktop",
-      "cwd": "\\Users\\GAMER\\Documents\\My Web Sites\\note-platform\\client",
+      "cwd": "./client",
       "focus": true,
       "command": "npm run dev"
     },
@@ -14,7 +14,7 @@
       "name": "Server",
       "description": "Termianl linked to the server-side",
       "icon": "server",
-      "cwd": "\\Users\\GAMER\\Documents\\My Web Sites\\note-platform\\server",
+      "cwd": "./server",
       "focus": true,
       "split": "Client",
       "command": "npm run dev"

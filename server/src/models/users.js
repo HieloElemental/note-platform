@@ -10,7 +10,7 @@ const findByUsername = async (user_username) => {
     .select({
       id: "id",
       username: "username",
-      straffId: "staff_id",
+      staffId: "staff_id",
     })
     .where({ user_username: user_username })
     .join(
@@ -43,7 +43,6 @@ const getStaffUserData = async (id) => {
       const staff = await staffService.findStaffByUserId(user.id);
       userData = { ...staff, ...user };
     });
-    console.log(userData);
 
     return userData;
   } catch (error) {
