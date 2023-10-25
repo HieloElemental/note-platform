@@ -1,12 +1,26 @@
 import { PropTypes } from "prop-types";
+import { useState } from "react";
 
 import SquareImg from "./components/SquareImg";
 
 import "./index.css";
 
 const Sidebar = ({ title, user }) => {
+  const [hidden, setHidden] = useState(true);
+
+  const handleMouseEnter = () => {
+    setHidden(false);
+  };
+
+  const handleMouseLeave = () => {
+    setHidden(true);
+  };
   return (
-    <div className='Sidebar hidden'>
+    <div
+      className={`Sidebar ${hidden && "hidden"}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <h1>{title}</h1>
       <ul className='User-data'>
         <li className='li-img'>

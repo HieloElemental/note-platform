@@ -6,7 +6,10 @@ import Navbar from "../../components/Navbar/index";
 import Main from "../../components/Main/index";
 import Sidebar from "../../components/Sidebar/index";
 import Card from "../../components/Card/index";
+import Flex from "../../components/Flex/index";
 import { useEffect, useState } from "react";
+
+import "./index.css";
 
 const Staff = () => {
   const [staffs, setStaffs] = useState([]);
@@ -32,19 +35,21 @@ const Staff = () => {
         <Card className='Manage'>
           <h1>Manejar Personal</h1>
           <br />
-          <Card>
-            <h2>Cargos</h2>
-          </Card>
-          <Card>
-            <h2>Personal</h2>
-            {staffs && (
-              <ul>
-                {staffs?.map((staff, i) => (
-                  <li key={i}>{staff.firstName}</li>
-                ))}
-              </ul>
-            )}
-          </Card>
+          <Flex>
+            <Card className='StaffCard'>
+              <h2>Personal</h2>
+              {staffs && (
+                <ul>
+                  {staffs?.map((staff, i) => (
+                    <li key={i}>{staff.firstName}</li>
+                  ))}
+                </ul>
+              )}
+            </Card>
+            <Card className=''>
+              <h2>Cargos</h2>
+            </Card>
+          </Flex>
         </Card>
       </Main>
     </>

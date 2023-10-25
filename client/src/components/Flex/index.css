@@ -1,0 +1,8 @@
+.Flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
+}

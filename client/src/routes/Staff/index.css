@@ -1,5 +1,4 @@
 .Manage {
-  width: 60%;
   color: #f2f2f2;
 }
 
@@ -87,4 +86,14 @@
 .Manage table td {
   border-bottom: 1px solid #f2f2f2;
   padding: 10px;
+}
+
+.StaffCard {
+  min-width: 400px;
+}
+
+@media screen and (max-width: 1000px) {
+  .StaffCard {
+    min-width: 100%;
+  }
 }

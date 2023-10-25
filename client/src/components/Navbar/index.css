@@ -114,6 +114,11 @@ li.Navbar-open svg * {
   cursor: pointer;
 }
 
+main {
+  margin-top: 60px;
+  min-height: calc(100vh - 60px) !important;
+}
+
 svg.open path:nth-child(1) {
   transform: translatex(-8px) translatey(21px) rotate(-45deg) scale(1.5);
 }
@@ -131,7 +136,7 @@ svg.open path:nth-child(3) {
     max-width: 100%;
     width: 100vw;
     padding: 0 25px;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .Navbar-navbar .Navbar-links {

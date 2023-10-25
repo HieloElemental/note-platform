@@ -11,6 +11,12 @@ div.Card {
 
 @media screen and (max-width: 1000px) {
   div.Card {
-    width: 100%;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  div.Card {
+    padding: 10px 0;
   }
 }
