@@ -53,7 +53,17 @@ const findStaffByUserId = (userId) => {
 
 const listStaff = () => {
   try {
-    return db(T_STAFF);
+    return db(T_STAFF)
+      .select({
+        staffId: `${T_STAFF}.id`,
+        staffFirstName: `${T_STAFF}.first_name`,
+        staffSecondName: `${T_STAFF}.second_name`,
+        staffFirstLastName: `${T_STAFF}.first_last_name`,
+        staffSecondLastName: `${T_STAFF}.second_last_name`,
+        staffIdentificationNumber: `${T_STAFF}.identification_number`,
+        positionName: `${T_POSITIONS}.position_name`,
+      })
+      .join(T_POSITIONS, `${T_POSITIONS}.id`, "=", `${T_STAFF}.position_id`);
   } catch (error) {
     throw error;
   }

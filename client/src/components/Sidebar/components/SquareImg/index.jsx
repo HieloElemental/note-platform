@@ -18,17 +18,25 @@ const SquareImg = ({ src, alt }) => {
   };
 
   useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      resizeForSquareAppearance();
+    });
+
+    if (aspectRatioRef.current) {
+      resizeObserver.observe(aspectRatioRef.current);
+    }
+
     resizeForSquareAppearance();
-    window.addEventListener("resize", resizeForSquareAppearance);
+
     return () => {
-      window.removeEventListener("resize", resizeForSquareAppearance);
+      resizeObserver.disconnect();
     };
   }, [resizeForSquareAppearance]);
 
   return (
     <>
       <img
-        className="ratio-1-1"
+        className='ratio-1-1'
         src={src}
         alt={alt}
         ref={aspectRatioRef}

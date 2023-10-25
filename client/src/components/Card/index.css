@@ -6,6 +6,7 @@ div.Card {
   align-items: center;
   padding: 10px 30px;
   margin-bottom: 20px;
+  color: #fff;
 }
 
 @media screen and (max-width: 1000px) {

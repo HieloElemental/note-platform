@@ -12,16 +12,12 @@ const Home = () => {
 
   return (
     <>
-      <ErrorAlert type="ErrorAlert" />
+      <ErrorAlert type='ErrorAlert' />
       <header>
         <Navbar />
       </header>
-      <Main>
-        <Sidebar
-          user={user?.userData}
-          title={user?.userData?.roleDisplayname}
-        />
-      </Main>
+      <Sidebar user={user?.userData} title={user?.userData?.roleDisplayname} />
+      <Main></Main>
     </>
   );
 };

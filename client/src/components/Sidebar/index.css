@@ -1,15 +1,36 @@
+:root {
+  --animation-time: 0.5s;
+}
+
 .Sidebar {
+  margin-top: 60px;
+  height: calc(100vh - 60px);
+  padding: 15px;
+  background: #111;
+  position: fixed;
   width: 30%;
   max-width: 400px;
   color: #f2f2f2;
+  transition: var(--animation-time) ease-in-out;
 }
+
+.Sidebar.hidden {
+  width: 80px;
+}
+
+.Sidebar.hidden h1 {
+  font-size: 0px;
+  transition: var(--animation-time) ease-in-out;
+}
+
 .Sidebar h1 {
+  font-size: 40px;
   text-align: center;
 }
 
 .Sidebar h1,
 .Sidebar ul li {
-  padding: 10px 0;
+  padding-bottom: 10px;
 }
 
 .Sidebar ul li {
@@ -25,4 +46,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+main {
+  width: calc(100vw - 80px);
+  margin-left: 80px;
 }

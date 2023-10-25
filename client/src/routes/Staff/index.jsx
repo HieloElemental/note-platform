@@ -1,18 +1,25 @@
 import useUser from "../../hooks/useUser";
 
-import { Link } from "react-router-dom";
-import { useState } from "react";
-
+import StaffProvider from "../../utils/providers/staffProvider";
 import ErrorAlert from "../../components/ErrorAlert/index";
 import Navbar from "../../components/Navbar/index";
 import Main from "../../components/Main/index";
 import Sidebar from "../../components/Sidebar/index";
 import Card from "../../components/Card/index";
+import { useEffect, useState } from "react";
 
-import fakeUsersProvider from "../../utils/fakeUsersProvider";
-
-const Home = () => {
+const Staff = () => {
+  const [staffs, setStaffs] = useState([]);
   const user = useUser();
+
+  const setStaffsData = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    setStaffs(await StaffProvider.getStaffs(accessToken));
+  };
+
+  useEffect(() => {
+    setStaffsData();
+  }, []);
 
   return (
     <>
@@ -20,80 +27,28 @@ const Home = () => {
       <header>
         <Navbar />
       </header>
+      <Sidebar user={user?.userData} title={user?.userData?.roleDisplayName} />
       <Main>
-        <Sidebar
-          user={user?.userData}
-          title={user?.userData?.roleDisplayname}
-        />
         <Card className='Manage'>
-          <h1>Manejar Usuarios</h1>
-          <ul>
-            {userRoles.map((userRole, i) => {
-              return (
-                <li key={i}>
-                  <Link to={`/manage/${userRole.name}`}>
-                    {userRole.displayName}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-          <h1>Listado De Usuarios Vigentes</h1>
-          <form autoComplete='off'>
-            <div className='user-box'>
-              <label>Tipo de usuario:</label>
-              <select
-                name='userType'
-                id='userType'
-                defaultValue='default'
-                onChange={selectedUserHandler}
-              >
-                <option value='default'>Seleccionar</option>
-                {userRoles.map((userRole, i) => {
-                  return (
-                    <option key={i} value={i}>
-                      {userRole.displayName}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </form>
-          {selectedUserRole != "default" && (
-            <>
-              <h1>{userRoles[selectedUserRole].displayName}</h1>
-              {userRoles[selectedUserRole].users && (
-                <table>
-                  <thead>
-                    <tr>
-                      <td width='70%'>Nombre</td>
-                      <td>Ver</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {userRoles[selectedUserRole].users.map((user, i) => {
-                      return (
-                        <tr key={i}>
-                          <td>{user.roleDisplayname}</td>
-                          <td>
-                            <Link
-                              to={`/manage/${userRoles[selectedUserRole].single}/${user.userId}`}
-                            >
-                              &#128269;
-                            </Link>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              )}
-            </>
-          )}
+          <h1>Manejar Personal</h1>
+          <br />
+          <Card>
+            <h2>Cargos</h2>
+          </Card>
+          <Card>
+            <h2>Personal</h2>
+            {staffs && (
+              <ul>
+                {staffs?.map((staff, i) => (
+                  <li key={i}>{staff.firstName}</li>
+                ))}
+              </ul>
+            )}
+          </Card>
         </Card>
       </Main>
     </>
   );
 };
 
-export default Home;
+export default Staff;

@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { PropTypes } from "prop-types";
 import useError from "../hooks/useError";
-import userProvider from "../utils/userProvider";
+import userProvider from "../utils/providers/userProvider";
 
 const UserContext = createContext(null);
 

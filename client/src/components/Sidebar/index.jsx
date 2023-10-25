@@ -1,39 +1,38 @@
 import { PropTypes } from "prop-types";
 
-import Card from "./../Card/index";
 import SquareImg from "./components/SquareImg";
 
 import "./index.css";
 
 const Sidebar = ({ title, user }) => {
   return (
-    <Card className="Sidebar">
+    <div className='Sidebar hidden'>
       <h1>{title}</h1>
-      <ul className="Userdata">
-        <li className="li-img">
+      <ul className='User-data'>
+        <li className='li-img'>
           <SquareImg
             src={`${import.meta.env.VITE_BACKEND_URL}${user?.pfp}`}
-            alt=""
+            alt=''
           />
         </li>
-        {user?.roleDisplayname && (
+        {user?.roleDisplayName && (
           <li>
             <p>
               <strong>Nombre: </strong>
-              {user?.roleDisplayname || "Sin Nombre"}
+              {user?.roleDisplayName || "Sin Nombre"}
             </p>
           </li>
         )}
-        {user?.roleLastnames && (
+        {user?.roleLastNames && (
           <li>
             <p>
               <strong>Apellidos: </strong>
-              {user?.roleLastnames || "Sin Nombre"}
+              {user?.roleLastNames || "Sin Nombre"}
             </p>
           </li>
         )}
       </ul>
-    </Card>
+    </div>
   );
 };
 Sidebar.propTypes = {

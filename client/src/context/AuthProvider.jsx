@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import useUser from "../hooks/useUser";
 import useError from "../hooks/useError";
 import PropTypes from "prop-types";
-import authProvider from "../utils/authProvider";
+import authProvider from "../utils/providers/authProvider";
 
 const AuthContext = createContext(null);
 
