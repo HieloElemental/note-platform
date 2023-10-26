@@ -7,14 +7,14 @@
   padding: 15px;
   background: #111;
   position: fixed;
-  width: 30%;
+  width: 300px;
   max-width: 400px;
   color: #f2f2f2;
   transition: var(--animation-time) ease-in-out;
 }
 
 .Sidebar.hidden {
-  width: 80px;
+  width: 70px;
 }
 
 .Sidebar.hidden h1 {
@@ -48,7 +48,8 @@
 }
 
 main {
-  width: calc(100vw - 90px);
-  margin-left: 80px;
+  min-width: 0;
+  width: calc(100vw - 70px);
+  margin-left: 70px;
   align-items: flex-start;
 }
