@@ -23,13 +23,13 @@ const loginCtrl = async (req, res) => {
       );
     }
 
-    const logedUser = await usersService.login({ reqUsername: username });
+    const loggedUser = await usersService.login({ reqUsername: username });
 
-    if (!logedUser) {
+    if (!loggedUser) {
       return handleUnauthorized(res, "Credenciales Inválidas!");
     }
 
-    const { password: hashedPassword, id, staffId, enrollmentId } = logedUser;
+    const { password: hashedPassword, id, staffId, enrollmentId } = loggedUser;
     const isStaff = Boolean(staffId);
     const userReferenceId = staffId || enrollmentId;
 
@@ -46,7 +46,7 @@ const loginCtrl = async (req, res) => {
       }
     } else {
       // Handle non-staff user (e.g., enrollment)
-      // const logedEnrollment = await true; //TODO: make the enrollment model
+      // const loggedEnrollment = await true; //TODO: make the enrollment model
     }
 
     const user = { id, isStaff, userReferenceId, username };
