@@ -10,10 +10,20 @@ import Flex from "../../components/Flex/index";
 import { useEffect, useState } from "react";
 
 import "./index.css";
+import Button from "./../../components/Button/index";
 
 const Staff = () => {
   const [staffs, setStaffs] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
   const user = useUser();
+
+  const switchSelectedStaff = (staffId) => {
+    if (selectedId === staffId) {
+      setSelectedId(null);
+    } else {
+      setSelectedId(staffId);
+    }
+  };
 
   const setStaffsData = async () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -38,13 +48,60 @@ const Staff = () => {
           <Flex>
             <Card className='StaffCard'>
               <h2>Personal</h2>
-              {staffs && (
-                <ul>
-                  {staffs?.map((staff, i) => (
-                    <li key={i}>{staff.firstName}</li>
-                  ))}
-                </ul>
-              )}
+              <table>
+                <thead>
+                  <tr>
+                    <td>Nombre</td>
+                    <td>Identificación</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {staffs &&
+                    staffs?.map(
+                      (
+                        {
+                          staffFirstName,
+                          staffSecondName,
+                          staffFirstLastName,
+                          staffSecondLastName,
+                          staffIdentificationNumber,
+                          staffId,
+                        },
+                        i
+                      ) => (
+                        <>
+                          <tr
+                            key={i}
+                            onClick={() => switchSelectedStaff(staffId)}
+                          >
+                            <td>
+                              {`${staffFirstName || ""} `}
+                              {`${staffSecondName || ""} `}
+                              {`${staffFirstLastName || ""} `}
+                              {`${staffSecondLastName || ""} `}
+                            </td>
+                            <td>{staffIdentificationNumber || ""}</td>
+                          </tr>
+                          {selectedId === staffId && (
+                            <tr>
+                              <td colSpan={10}>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-around",
+                                  }}
+                                >
+                                  <Button>Ver Información</Button>
+                                  <Button>Editar</Button>
+                                </div>
+                              </td>
+                            </tr>
+                          )}
+                        </>
+                      )
+                    )}
+                </tbody>
+              </table>
             </Card>
             <Card className=''>
               <h2>Cargos</h2>
