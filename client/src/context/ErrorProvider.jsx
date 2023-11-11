@@ -11,10 +11,14 @@ const ErrorProvider = ({ children }) => {
   };
 
   const clearError = () => {
-    setError("");
+    setError(null);
   };
 
-  const value = { error, showError, clearError };
+  const hasError = () => {
+    error ? true : false;
+  };
+
+  const value = { error, showError, clearError, hasError };
   return (
     <ErrorContext.Provider value={value}>{children}</ErrorContext.Provider>
   );

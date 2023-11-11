@@ -19,7 +19,7 @@ const loginCtrl = async (req, res) => {
     if (!isValidInput(username, password)) {
       return handleBadRequest(
         res,
-        "Campos Vacíos O Carácteres Inválidos En Algún Campo"
+        "Campos Vacíos O Caracteres Inválidos En Algún Campo"
       );
     }
 
@@ -37,7 +37,7 @@ const loginCtrl = async (req, res) => {
       return handleUnauthorized(res, "Credenciales Invalidas!");
     }
 
-    let extraInfo = {};
+    let extraInfo = { positionAllowedModules: [] };
 
     if (isStaff) {
       extraInfo = await getStaffInfo(id);

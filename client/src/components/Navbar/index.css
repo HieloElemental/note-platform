@@ -119,6 +119,10 @@ main {
   min-height: calc(100vh - 60px) !important;
 }
 
+.FullScreenCard {
+  height: calc(100vh - 60px) !important;
+}
+
 svg.open path:nth-child(1) {
   transform: translatex(-8px) translatey(21px) rotate(-45deg) scale(1.5);
 }
@@ -204,5 +208,9 @@ svg.open path:nth-child(3) {
 
   li.Navbar-open {
     display: block;
+  }
+
+  .FullScreenCard {
+    height: calc(100vh - 90px) !important;
   }
 }

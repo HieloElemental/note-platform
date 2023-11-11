@@ -1,4 +1,5 @@
 .Button {
+  cursor: pointer;
   display: block;
   border: 3px solid #c9c9c9;
   border-radius: 10px;

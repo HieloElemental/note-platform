@@ -28,19 +28,19 @@ const GeneralForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      autoComplete="off"
+      autoComplete='off'
       className={`GeneralForm ${type ? type : ""}`}
     >
       {children}
       {fields.map((field, index) => (
-        <div key={index} className="GeneralForm-field-box">
+        <div key={index} className='GeneralForm-field-box'>
           {field.type === "select" ? (
             <select
               name={field.name}
-              defaultValue="default"
+              defaultValue='default'
               onChange={handleChange}
             >
-              <option value="default">Seleccionar</option>
+              <option value='default'>Seleccionar</option>
               {field.options.map((option, i) => (
                 <option key={i} value={option.value}>
                   {option.label}
@@ -59,7 +59,7 @@ const GeneralForm = ({
         </div>
       ))}
       <button className={`GeneralForm-btn ${btn.type ? btn.type : ""}`}>
-        {name || "Enviar"}
+        {btn.name || "Enviar"}
       </button>
     </form>
   );

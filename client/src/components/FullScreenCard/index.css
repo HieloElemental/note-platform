@@ -1,0 +1,52 @@
+.FullScreenCard {
+  position: fixed;
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(5px);
+  width: 100vw;
+  height: 100vh;
+  bottom: 100vh;
+  padding-top: 60px;
+  padding: 20px;
+  z-index: 10;
+  transition: 1s;
+
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.close-button {
+  cursor: pointer;
+  position: absolute;
+  font-weight: bold;
+  font-size: 25px;
+  right: 10px;
+  color: #fff;
+  padding: 5px 15px 10px 15px;
+  background: transparent;
+  border: 3px solid #fff;
+  border-radius: 5px;
+}
+
+.slideIn {
+  animation-name: slideIn;
+}
+
+.slideOut {
+  animation-name: slideOut;
+}
+
+@keyframes slideOut {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: -100vh;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    bottom: 0;
+  }
+}

@@ -20,7 +20,15 @@ const authenticateToken = (requiredModules) => {
           }
         }
 
-        if (requiredModules && !requiredModules.includes(decodedToken.role))
+        if (decodedToken.isAdmin) {
+          req.body = decodedToken;
+          return next();
+        }
+
+        if (
+          requiredModules &&
+          !requiredModules.includes(decodedToken.positionAllowedModules)
+        )
           return res.status(401).send({ error: "token role not allowed" });
 
         req.body = decodedToken;

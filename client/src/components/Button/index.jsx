@@ -11,9 +11,9 @@ const Button = ({ onClick, type, children }) => {
   );
 };
 Button.propTypes = {
-  onClick: PropTypes.function,
+  onClick: PropTypes.func,
   type: PropTypes.string,
-  children: PropTypes.ReactElement,
+  children: PropTypes.node,
 };
 
 export default Button;

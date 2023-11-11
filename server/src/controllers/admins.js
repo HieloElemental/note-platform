@@ -19,22 +19,22 @@ const list = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      adminDisplayname: admin_displayname,
+      adminDisplayName: admin_display_name,
       userUsername: user_username,
       userPassword: user_password,
     } = req.body;
-    const fieldsToValidate = [admin_displayname, user_username, user_password];
+    const fieldsToValidate = [admin_displayName, user_username, user_password];
     const isValidFields = fieldsToValidate.every(isValidString);
 
     if (!isValidFields) {
       return handleBadRequest(
         req,
-        "Campos Vacíos O Carácteres Inválidos En Algún Campo"
+        "Campos Vacíos O Caracteres Inválidos En Algún Campo"
       );
     }
 
     const admin = await adminUsersService.createUserAdmin({
-      admin_displayname,
+      admin_display_name,
       user_username,
       user_password,
     });
