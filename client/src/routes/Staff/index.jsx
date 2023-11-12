@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import useUser from "../../hooks/useUser";
-import useError from "../../hooks/useError";
+import useStaff from "../../hooks/useStaff";
+import usePosition from "./../../hooks/usePosition";
 
-import StaffProvider from "../../utils/providers/staffProvider";
-import PositionProvider from "../../utils/providers/positionProvider";
 import ErrorAlert from "../../components/ErrorAlert/index";
 import Navbar from "../../components/Navbar/index";
 import Main from "../../components/Main/index";
@@ -15,51 +14,65 @@ import FullScreenCard from "./../../components/FullScreenCard/index";
 import GeneralForm from "./../../components/GeneralForm/index";
 
 import "./index.css";
-import { PropTypes } from "prop-types";
 
 const Staff = () => {
   const user = useUser();
-  const usedError = useError();
   const [isCreating, setIsCreating] = useState(null);
 
   const setIsCreatingToNull = () => {
     setIsCreating(null);
   };
 
+  const addPositionFields = [
+    {
+      type: "text",
+      name: "position_name",
+      label: "Nombre del Cargo",
+      required: true,
+    },
+    {
+      type: "list",
+      name: "position_fields",
+      label: "campos requeridos para este cargo",
+      fields: [
+        {
+          type: "select",
+          name: "field_type",
+          label: "Seleccionar tipo",
+          options: [{ value: "text", label: "texto" }],
+        },
+        {
+          type: "text",
+          name: "field_name",
+          label: "Nombre del campo",
+          required: true,
+        },
+        {
+          type: "checkbox",
+          name: "field_required",
+          label: "¿El campo es requerido?",
+        },
+      ],
+    },
+    {
+      type: "checkbox",
+      name: "is_admin",
+      label: "¿Es administrador?",
+    },
+  ];
+
   const addStaffFields = [
     { type: "text", name: "username", label: "Usuario", required: true },
     { type: "password", name: "password", label: "Contraseña", required: true },
   ];
 
-  const [positions, setPositions] = useState([]);
-  const [staffs, setStaffs] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-      const positionsData = await PositionProvider.getPositions({
-        token: accessToken,
-      });
-      const staffsData = await StaffProvider.getStaffs({ token: accessToken });
-
-      setPositions(positionsData);
-      setStaffs(staffsData);
-    } catch (err) {
-      usedError.showError(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [usedError]);
   return (
     <>
       <ErrorAlert type='ErrorAlert' />
       {isCreating && (
         <FullScreenCard closeAction={() => setIsCreatingToNull()}>
           <GeneralForm
-            fields={addStaffFields}
+            fields={isCreating == "staff" ? addStaffFields : addPositionFields}
             onSubmit={() => {}}
             btn={{ type: "add" }}
           >
@@ -85,8 +98,8 @@ const Staff = () => {
           </Flex>
           <br />
           <Flex>
-            <StaffCard staffs={staffs} />
-            <PositionsCard positions={positions} />
+            <StaffCard />
+            <PositionsCard />
           </Flex>
         </Card>
       </Main>
@@ -94,7 +107,8 @@ const Staff = () => {
   );
 };
 
-const PositionsCard = ({ positions }) => {
+const PositionsCard = () => {
+  const PositionHook = usePosition();
   const [selectedPositionId, setSelectedPositionId] = useState(null);
 
   const switchSelectedPosition = (positionId) => {
@@ -115,8 +129,8 @@ const PositionsCard = ({ positions }) => {
           </tr>
         </thead>
         <tbody>
-          {positions &&
-            positions?.map(({ id, positionName }) => (
+          {PositionHook?.positions &&
+            PositionHook?.positions.map(({ id, positionName }) => (
               <React.Fragment key={id}>
                 <tr onClick={() => switchSelectedPosition(id)}>
                   <td>{positionName}</td>
@@ -143,11 +157,9 @@ const PositionsCard = ({ positions }) => {
     </Card>
   );
 };
-PositionsCard.propTypes = {
-  positions: PropTypes.arrayOf(PropTypes.any),
-};
 
-const StaffCard = ({ staffs }) => {
+const StaffCard = () => {
+  const StaffHook = useStaff();
   const [selectedStaffId, setSelectedStaffId] = useState(null);
 
   const switchSelectedStaff = (staffId) => {
@@ -169,8 +181,8 @@ const StaffCard = ({ staffs }) => {
           </tr>
         </thead>
         <tbody>
-          {staffs &&
-            staffs?.map(
+          {StaffHook?.staffs &&
+            StaffHook?.staffs.map(
               ({
                 staffFirstName,
                 staffSecondName,
@@ -211,9 +223,6 @@ const StaffCard = ({ staffs }) => {
       </table>
     </Card>
   );
-};
-StaffCard.propTypes = {
-  staffs: PropTypes.arrayOf(PropTypes.any),
 };
 
 export default Staff;

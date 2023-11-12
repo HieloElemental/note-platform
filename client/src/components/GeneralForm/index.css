@@ -13,6 +13,12 @@
   flex-direction: row;
 }
 
+.GeneralForm-list {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
 .GeneralForm h2 {
   margin: 0 0 30px;
   padding: 0;
@@ -37,6 +43,35 @@
   background: transparent;
 }
 
+.GeneralForm .GeneralForm-field-box.checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.GeneralForm .GeneralForm-field-box.checkbox input {
+  width: auto;
+  margin-right: 10px;
+}
+
+.GeneralForm .GeneralForm-field-box select {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.GeneralForm .GeneralForm-field-box select option {
+  list-style: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
 .GeneralForm.on-line .GeneralForm-field-box {
   width: 60%;
 }
@@ -54,6 +89,14 @@
 
 .GeneralForm .GeneralForm-field-box input:focus ~ label,
 .GeneralForm .GeneralForm-field-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.GeneralForm .GeneralForm-field-box select:focus ~ label,
+.GeneralForm .GeneralForm-field-box select:valid ~ label {
   top: -20px;
   left: 0;
   color: #03e9f4;
@@ -103,5 +146,9 @@
 
 .GeneralForm .GeneralForm-btn.add:hover {
   background: #014d1a;
+  color: #fff;
+}
+
+.GeneralForm .Button {
   color: #fff;
 }

@@ -5,3 +5,7 @@
   border-radius: 10px;
   padding: 5px;
 }
+
+.Button-inline {
+  display: inline-block;
+}

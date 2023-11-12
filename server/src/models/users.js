@@ -29,7 +29,6 @@ const findByUserId = async (id) => {
       username: "username",
       staffId: "staff_id",
       enrollmentId: "enrollment_id",
-      password: "user_password",
     })
     .where({ id })
     .first();
